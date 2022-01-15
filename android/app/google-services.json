@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "664085512002",
+    "project_id": "ric-covid",
+    "storage_bucket": "ric-covid.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:664085512002:android:08bf39cd46e345db4f92db",
+        "android_client_info": {
+          "package_name": "com.app.covid_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "664085512002-q8uld977o30b1tctuscbpkmctlcfu69t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFLWJ1KQwkyxaBVzaReuErNfPanmIYcbg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "664085512002-q8uld977o30b1tctuscbpkmctlcfu69t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
