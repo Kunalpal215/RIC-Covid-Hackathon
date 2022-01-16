@@ -43,6 +43,8 @@ dependencies:
   shared_preferences: ^2.0.7
   firebase_dynamic_links: ^4.0.3
   intl_phone_number_input: ^0.7.0+2
+  geolocator: ^8.0.3
+  google_maps_flutter: ^2.1.1
 
 
 

@@ -1,5 +1,6 @@
 // // Importing packages
 // import 'package:flutter/cupertino.dart';
+import 'package:covid_app/screens/covid_map/map.dart';
 import 'package:flutter/material.dart';
 import 'package:covid_app/screens/auth/profile_screen.dart';
 // import 'package:covid_app/services/share_app.dart';
@@ -46,7 +47,19 @@ class _HomeScreenState extends State<HomeScreen> {
           'Home Screen',
         ),
       ),
-      body:Center(child:Text("Welcome"))
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            ElevatedButton(
+              onPressed: (){
+                Navigator.pushNamed(context, MapScreen.id);
+              },
+              child: Text('Covid Map'),
+            ),
+          ],
+        ),
+      ),
     );
     // return const Scaffold(
 //       appBar: AppBar(
