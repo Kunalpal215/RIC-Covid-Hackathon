@@ -12,18 +12,19 @@ class User {
   final String mobileNumber;
 
   // User's Name
-  String name;
+  String? name;
 
   // Variable to check if user's document exists in Cloud Firestore
   bool exists = false;
 
-  User({required this.mobileNumber, required this.name});
+  User({required this.mobileNumber, this.name});
 
   // Checks if user's document is present in Cloud Firestore and updates 'exists' property
   Future loadExistence() async {
     await FirebaseFirestore.instance
-        .collection('users').where('phone',isEqualTo: mobileNumber).get().
+        .collection('users').where('mobile',isEqualTo: mobileNumber).get().
         then((documentSnapshot) {
+          print(documentSnapshot.size);
       if (documentSnapshot.size>0) {
         exists = true;
       } else {
@@ -33,11 +34,12 @@ class User {
   }
 
   // Creates and updates documents in Firestore collection 'users' for this user
-  Future createAndUpdateDocument() {
+  Future createAndUpdateDocument(String mobile,String? name) {
     CollectionReference users = FirebaseFirestore.instance.collection('users');
-    return users.doc(mobileNumber).set({
+    print(name);
+    return users.doc(mobileNumber).update({
       'name': name,
-      'mobile': mobileNumber,
+      'mobile': mobile,
     }).then((value) {
       // print('New document created / updated for user');
     }).catchError((e) {

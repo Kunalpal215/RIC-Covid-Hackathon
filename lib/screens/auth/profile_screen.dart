@@ -51,7 +51,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               onPressed: (){
                 setState(() {
-                  Navigator.pushNamed(context, EditProfileScreen.id);
+                  Navigator.pushNamed(context, EditProfileScreen.id).then((value){
+                    setState(() {
+
+                    });
+                  });
                 });
               },
             ),

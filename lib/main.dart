@@ -11,6 +11,8 @@ import 'package:covid_app/screens/home/home_screen.dart';
  import 'package:covid_app/screens/auth/profile_screen.dart';
 import 'package:covid_app/screens/home/home_screen.dart';
 import 'package:covid_app/screens/welcome_screen.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
  import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
@@ -27,10 +29,21 @@ Future<void> main() async {
     kCurrUser!.retrieveDocument();
     kCurrUser!.downloadProfileImage();
   }
-
-  runApp(const MyApp());
+  configLoading();
+  runApp(
+    Phoenix(
+      child: MyApp(),
+    ),
+  );
 }
-
+void configLoading() {
+  EasyLoading.instance
+    ..indicatorType = EasyLoadingIndicatorType.fadingCircle
+    ..indicatorSize = 45.0
+    ..radius = 10.0
+    ..userInteractions = false
+    ..dismissOnTap = false;
+}
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -55,6 +68,8 @@ class _MyAppState extends State<MyApp> {
         EditProfileScreen.id: (context) => EditProfileScreen(),
         MapScreen.id : (context) => MapScreen(),
       },
+      builder: EasyLoading.init(),
+
     );
   }
 

@@ -88,12 +88,19 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           Icons.check,
         ),
         onPressed: () async{
-          await kCurrUser!.createAndUpdateDocument();
+          print(kCurrUser!.name );
+          await kCurrUser!.createAndUpdateDocument(kCurrUser!.mobileNumber,kCurrUser!.name!);
+          print('1');
           await kCurrUser!.retrieveDocument();
+          print('2');
           await image.copy(kProfileImagePath!);
+          print('3');
           await kCurrUser!.uploadProfileImage();
+          print('4');
           await kCurrUser!.downloadProfileImage();
+          print('5');
           await loadUser(kCurrUser!.mobileNumber);
+          print('6');
           Navigator.pop(context);
         },
       ),
