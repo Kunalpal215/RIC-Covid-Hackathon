@@ -1,24 +1,8 @@
-// // Importing packages
-// import 'package:flutter/cupertino.dart';
 import 'package:covid_app/screens/auth/profile_screen.dart';
 import 'package:covid_app/screens/feedback/complaint_list.dart';
 import 'package:covid_app/screens/feedback/complaint_register.dart';
-import 'package:covid_app/screens/home/home_page_info.dart';
+import 'package:covid_app/screens/home/user/pages/home_page_info.dart';
 import 'package:flutter/material.dart';
-
-// import 'package:covid_app/services/share_app.dart';
-// import 'package:permission_handler/permission_handler.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
-
-// // Importing Screens
-// import 'package:covid_app/screens/welcome_screen.dart';
-// import 'package:covid_app/screens/auth/profile_screen.dart';
-// import 'package:covid_app/constants.dart';
-// import 'package:covid_app/screens/home/contactpage.dart';
-
-// // Importing Services
-// import 'package:covid_app/services/logout_user.dart';
-// import 'package:covid_app/services/permissions.dart';
 
 class HomeScreen extends StatefulWidget {
   static const id = '/home';
@@ -69,10 +53,6 @@ class _HomeScreenState extends State<HomeScreen> {
         },
         child: Icon(Icons.mode_edit_outline_outlined),
       ),
-      //floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterFloat,
     );
   }
-
-  @override
-  void initState() {}
 }

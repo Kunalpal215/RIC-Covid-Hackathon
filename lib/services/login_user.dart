@@ -6,7 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 // Importing Screens
 import 'package:covid_app/screens/auth/login_screen.dart';
-import 'package:covid_app/screens/home/home_screen.dart';
+import 'package:covid_app/screens/home/user/home_screen.dart';
 
 // // Importing Services
 import 'package:covid_app/services/load_user.dart';

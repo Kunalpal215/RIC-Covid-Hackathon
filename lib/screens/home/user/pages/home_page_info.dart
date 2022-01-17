@@ -4,7 +4,7 @@ import 'package:covid_app/screens/announcements/announcements.dart';
 import 'package:covid_app/services/logout_user.dart';
 import 'package:flutter/material.dart';
 
-import '../welcome_screen.dart';
+import '../../../welcome_screen.dart';
 class HomePageInfo extends StatefulWidget {
   const HomePageInfo({Key? key}) : super(key: key);
 

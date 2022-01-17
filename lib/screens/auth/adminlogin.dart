@@ -1,5 +1,5 @@
 import 'package:cool_alert/cool_alert.dart';
-import 'package:covid_app/screens/home/adminhome.dart';
+import 'package:covid_app/screens/home/admin/adminhome.dart';
 import 'package:covid_app/services/load_user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
