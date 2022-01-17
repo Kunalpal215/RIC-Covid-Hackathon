@@ -1,4 +1,5 @@
 // Importing General Packages
+import 'package:covid_app/components/animatedbuttonui.dart';
 import 'package:covid_app/screens/auth/adminlogin.dart';
 import 'package:flutter/material.dart';
 
@@ -19,56 +20,58 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-      ),
       body: SizedBox.expand(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const Text(
-              'Covid App',
-              style: TextStyle(
-                fontSize: 35,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
+        child: Container(
+          color: Color(0xFFFDE1AB),
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const Spacer(),
+              const Spacer(),
+              const Spacer(),
+              const Spacer(),
+              const Center(
+                child: Padding(
+                  padding:
+                  EdgeInsets.symmetric(horizontal: 10),
+                  child: Text("COVID MANAGEMENT APP",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 40,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.deepOrange)),
+                ),
               ),
-            ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: Colors.teal,
-                padding: const EdgeInsets.symmetric(horizontal: 20),
+              const Spacer(),
+              Image.asset(
+                'assets/images/welcomescreenlogo.png',
+                width: 250,
+                height: 250,
               ),
-              onPressed: () {
-                Navigator.pushNamed(context, LoginScreen.id);
-              },
-              child: const Text(
-                'Login as user',
-                style: TextStyle(fontSize: 22.5, color: Colors.white),
+              const Spacer(),
+              const Spacer(),
+              GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, LoginScreen.id);
+                },
+                child: const AnimatedButtonUI(
+                    text: "I AM A USER"),
               ),
-            ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: Colors.teal,
-                padding: const EdgeInsets.symmetric(horizontal: 20),
+              const Spacer(),
+              GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, AdminLoginScreen.id);
+                },
+                child: const AnimatedButtonUI(
+                    text: "I AM A ADMIN"),
               ),
-              onPressed: () {
-                Navigator.pushNamed(context, AdminLoginScreen.id);
-              },
-              child: const Text(
-                'Login as admin',
-                style: TextStyle(fontSize: 22.5, color: Colors.white),
-              ),
-            )
-          ],
+              Spacer(),
+              Spacer(),
+            ],
+          ),
         ),
       ),
     );

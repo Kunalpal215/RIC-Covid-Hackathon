@@ -1,20 +1,18 @@
 import 'package:covid_app/constants.dart';
 import 'package:covid_app/models/admin.dart';
 import 'package:covid_app/models/user.dart';
-import 'package:covid_app/screens/announcements/announcements.dart';
 import 'package:covid_app/screens/auth/adminlogin.dart';
 import 'package:covid_app/screens/auth/edit_profile_screen.dart';
 import 'package:covid_app/screens/auth/login_screen.dart';
 import 'package:covid_app/screens/auth/profile_screen.dart';
-import 'package:covid_app/screens/covid_map/map.dart';
-import 'package:covid_app/screens/feedback/complaint_register.dart';
 import 'package:covid_app/screens/home/admin/adminhome.dart';
 import 'package:covid_app/screens/home/user/home_screen.dart';
+import 'package:covid_app/screens/home/user/pages/announcements/announcements.dart';
+import 'package:covid_app/screens/home/user/pages/covid_map/map.dart';
+import 'package:covid_app/screens/home/user/pages/feedback/complaint_register.dart';
 import 'package:covid_app/screens/welcome_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
@@ -36,22 +34,12 @@ Future<void> main() async {
   if (kEmail != null) {
     kCurrAdmin = Admin(email: kEmail);
   }
-  configLoading();
   runApp(
-    Phoenix(
-      child: MyApp(),
-    ),
+    MyApp(),
   );
 }
 
-void configLoading() {
-  EasyLoading.instance
-    ..indicatorType = EasyLoadingIndicatorType.fadingCircle
-    ..indicatorSize = 45.0
-    ..radius = 10.0
-    ..userInteractions = false
-    ..dismissOnTap = false;
-}
+
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -64,12 +52,15 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'covid_app',
+      title: 'Covid Management',
       home: (kCurrUser == null && kCurrAdmin == null)
           ? const WelcomeScreen()
           : (kCurrUser != null && kCurrAdmin == null)
               ? const HomeScreen()
               : const AdminHome(),
+      theme: ThemeData(
+        primarySwatch: Colors.orange,
+      ),
       routes: {
         WelcomeScreen.id: (context) => const WelcomeScreen(),
         LoginScreen.id: (context) => const LoginScreen(),
@@ -82,7 +73,6 @@ class _MyAppState extends State<MyApp> {
         Announcements.id: (context) => Announcements(),
         AdminHome.id: (context) => AdminHome()
       },
-      builder: EasyLoading.init(),
     );
   }
 

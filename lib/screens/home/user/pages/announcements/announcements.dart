@@ -1,6 +1,6 @@
 // Importing Packages
+import 'package:covid_app/screens/home/user/pages/announcements/getAnnouncements.dart';
 import 'package:flutter/material.dart';
-import 'package:covid_app/screens/announcements/getAnnouncements.dart';
 
 class Announcements extends StatefulWidget {
   static const id = '/announcements';

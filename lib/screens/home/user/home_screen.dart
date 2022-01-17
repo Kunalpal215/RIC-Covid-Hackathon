@@ -1,7 +1,10 @@
+import 'dart:io';
+
+import 'package:covid_app/constants.dart';
 import 'package:covid_app/screens/auth/profile_screen.dart';
-import 'package:covid_app/screens/feedback/complaint_list.dart';
-import 'package:covid_app/screens/feedback/complaint_register.dart';
-import 'package:covid_app/screens/home/user/pages/home_page_info.dart';
+import 'package:covid_app/screens/home/user/pages/booking/slotbooking.dart';
+import 'package:covid_app/screens/home/user/pages/feedback/complaint_list.dart';
+import 'package:covid_app/screens/home/user/pages/landing/landing.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -15,44 +18,104 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int curIdx = 0;
-  List Screens = [HomePageInfo(), ComplaintListScreen()];
+  List Screens = [HomePageLanding(), SlotBooking(),ComplaintListScreen(), ProfileScreen()];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: [
-          IconButton(
-            icon: const Icon(
-              Icons.person,
-            ),
-            onPressed: () {
-              Navigator.pushNamed(context, ProfileScreen.id);
-            },
+        title: Text('Covid Management App'),
+      ),
+      drawer: SafeArea(
+        child: Drawer(
+          child: ListView(
+            children: [
+              // Profile Header -->
+              UserAccountsDrawerHeader(
+                accountName: Text(kCurrUser!.name ?? ''),
+                accountEmail: Text(kCurrUser!.mobileNumber),
+                currentAccountPicture: CircleAvatar(
+                  radius: 50.0,
+                  backgroundColor: const Color(0xFF778899),
+                  backgroundImage: FileImage(
+                    File(kProfileImagePath!),
+                  ),
+                ),
+                otherAccountsPictures: [
+                  IconButton(onPressed: (){
+                    setState(() {
+                      curIdx=Screens.length-1;
+                    });
+                    Navigator.pop(context);
+                  }, icon: Icon(Icons.edit))
+                ],
+              ),
+
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  InkWell(
+                    child: ListTile(
+                      leading: Icon(Icons.home_outlined),
+                      title: Text("Home"),
+                      onTap: () {
+                        setState(() {
+                          curIdx = 0;
+                        });
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ),
+                  // Courses -->
+                  InkWell(
+                    child: ListTile(
+                      leading: Icon(Icons.add_box_outlined),
+                      title: Text("Book"),
+                      onTap: () {
+                        setState(() {
+                          curIdx = 1;
+                        });
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ),
+
+                  // Academics -->
+                  InkWell(
+                    child: ListTile(
+                      leading: Icon(Icons.message),
+                      title: Text("Complaints"),
+                      onTap: () {
+                        setState(() {
+                          curIdx = 2;
+                        });
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ),
+                  // Job Updates -->
+                ],
+              ),
+            ],
           ),
-        ],
-        title: const Text(
-          'Home Screen',
         ),
       ),
       body: Screens[curIdx],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: curIdx,
-        onTap: (index) => setState(() {
-          curIdx = index;
-        }),
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.message), label: "Complaints"),
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushNamed(context, ComplaintScreen.id);
-        },
-        child: Icon(Icons.mode_edit_outline_outlined),
-      ),
+      // bottomNavigationBar: BottomNavigationBar(
+      //   currentIndex: curIdx,
+      //   onTap: (index) => setState(() {
+      //     curIdx = index;
+      //   }),
+      //   items: const [
+      //     BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+      //     BottomNavigationBarItem(
+      //         icon: Icon(Icons.add_circle_sharp), label: "Book"),
+      //     BottomNavigationBarItem(
+      //         icon: Icon(Icons.message), label: "Complaints"),
+      //     BottomNavigationBarItem(
+      //         icon: Icon(Icons.person), label: "Profile"),
+      //   ],
+      // ),
     );
   }
 }

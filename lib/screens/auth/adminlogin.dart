@@ -52,12 +52,18 @@ class _FormsState extends State<Forms> {
         : Form(
         key: keys,
         child: Container(
-          padding: EdgeInsets.all(15.0),
+          padding: EdgeInsets.all(5.0),
           child: (Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
+              SizedBox(height:10.0),
               TextFormField(
+
                 decoration: InputDecoration(
+border: OutlineInputBorder(
+          borderSide: const BorderSide(color: Colors.black, width: 2.0),
+              borderRadius: BorderRadius.circular(2.0),
+        ),
                     hintText: "Enter your email",
                     labelText: "Email",
                     icon: Icon(Icons.email)),
@@ -70,8 +76,13 @@ class _FormsState extends State<Forms> {
                 },
                 controller: emailEditingController,
               ),
+              SizedBox(height:10.0),
               TextFormField(
                 decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderSide: const BorderSide(color: Colors.black, width: 2.0),
+                      borderRadius: BorderRadius.circular(2.0),
+                    ),
                     hintText: "Enter your password",
                     labelText: "Password",
                     icon: Icon(Icons.lock)),
@@ -80,38 +91,21 @@ class _FormsState extends State<Forms> {
                       ? null
                       : "Enter Password 6+ characters";
                 },
+
                 controller: passwordEditingController,
               ),
-              SizedBox(height: 12),
-              SizedBox(
-                height: MediaQuery.of(context).size.height / 12,
-              ),
-              RaisedButton(
-                elevation: 0,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30.0)),
-                onPressed: () {
-                  signIn();
-                },
-                textColor: Colors.white,
-                padding: EdgeInsets.all(0.0),
-                child: Container(
-                  alignment: Alignment.center,
-                  width: _large
-                      ? _width! / 3.5
-                      : (_medium ? _width! / 3.25 : _width! / 3),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                    gradient: LinearGradient(
-                      colors: <Color>[Colors.blue[200]!, Colors.blueAccent],
-                    ),
+              SizedBox(height: 10),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                child: ElevatedButton(
+                  onPressed: () {
+                    signIn();
+                  },
+                    child: Text('Continue as admin',
+                        ),
                   ),
-                  padding: const EdgeInsets.all(12.0),
-                  child: Text('SIGN IN',
-                      style: TextStyle(
-                          fontSize: _large ? 14 : (_medium ? 12 : 10))),
                 ),
-              ),
+
             ],
           )),
         ));
@@ -132,11 +126,14 @@ class _FormsState extends State<Forms> {
         Navigator.pop(context);
         Navigator.pushReplacementNamed(context, AdminHome.id);
       } on FirebaseAuthException catch (e) {
+        print('aa0');
         if (e.code == 'user-not-found') {
+          print('aa');
           coolalertfailure('No user found for that email.');
           setState(() {
             _isloading = false;
           });
+          print('aa2');
         } else if (e.code == 'wrong-password') {
           coolalertfailure('Wrong password provided for that user.');
           setState(() {
@@ -158,24 +155,27 @@ class _FormsState extends State<Forms> {
   }
 
 
-
   coolalertsuccess(String text) {
     CoolAlert.show(
-      context: context,
-      type: CoolAlertType.success,
-      title: 'Congratulations',
-      text: text,
-      loopAnimation: false,
+        context: context,
+        type: CoolAlertType.success,
+        title: 'Success',
+        text: text,
+        loopAnimation: false,
+        confirmBtnColor: Colors.orange,
+        backgroundColor: Color(0xFFFDE1AB)
     );
   }
 
   coolalertfailure(String text) {
     CoolAlert.show(
-      context: context,
-      type: CoolAlertType.error,
-      title: 'Oops...',
-      text: text,
-      loopAnimation: false,
+        context: context,
+        type: CoolAlertType.error,
+        title: 'Oops...',
+        text: text,
+        loopAnimation: false,
+        confirmBtnColor: Colors.orange,
+        backgroundColor: Color(0xFFFDE1AB)
     );
   }
 }

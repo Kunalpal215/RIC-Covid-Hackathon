@@ -31,6 +31,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            if(kCurrUser!.name!=null)
             Text(
               'Hey ${kCurrUser!.name}',
             ),
