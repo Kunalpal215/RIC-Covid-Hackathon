@@ -9,6 +9,7 @@ import 'package:covid_app/models/user.dart';
  import 'package:covid_app/screens/auth/edit_profile_screen.dart';
 import 'package:covid_app/screens/auth/login_screen.dart';
 import 'package:covid_app/screens/auth/profile_screen.dart';
+import 'package:covid_app/screens/announcements/announcements.dart';
 import 'package:covid_app/screens/home/home_screen.dart';
  import 'package:covid_app/screens/auth/profile_screen.dart';
 import 'package:covid_app/screens/home/home_screen.dart';
@@ -70,6 +71,7 @@ class _MyAppState extends State<MyApp> {
         EditProfileScreen.id: (context) => EditProfileScreen(),
         MapScreen.id : (context) => MapScreen(),
         ComplaintScreen.id: (context) => ComplaintScreen(),
+        Announcements.id : (context) => Announcements(),
       },
       builder: EasyLoading.init(),
 
