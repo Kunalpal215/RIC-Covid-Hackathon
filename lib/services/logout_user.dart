@@ -14,3 +14,11 @@ Future logoutUser() async {
   kCurrUser = null;
   kMobileNumber = null;
 }
+
+Future logoutAdmin() async {
+  FirebaseAuth auth = FirebaseAuth.instance;
+  await auth.signOut();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.remove("email");
+  kCurrAdmin = null;
+}

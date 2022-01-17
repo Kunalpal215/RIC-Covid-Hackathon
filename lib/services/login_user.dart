@@ -27,6 +27,7 @@ loginUser(String mobileNumber, BuildContext context) async {
       await auth.signInWithCredential(credential).then((value) async {
         await loadUser(mobileNumber);
         Navigator.of(context).pop();
+        Navigator.of(context).pop();
         Navigator.pushReplacementNamed(context, HomeScreen.id);
         EasyLoading.dismiss();
       }).catchError((err) {

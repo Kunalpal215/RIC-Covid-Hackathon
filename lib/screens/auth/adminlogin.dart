@@ -1,4 +1,5 @@
 import 'package:cool_alert/cool_alert.dart';
+import 'package:covid_app/screens/home/adminhome.dart';
 import 'package:covid_app/services/load_user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -128,6 +129,8 @@ class _FormsState extends State<Forms> {
             password: passwordEditingController.text);
 
         await loadAdmin(emailEditingController.text);
+        Navigator.pop(context);
+        Navigator.pushReplacementNamed(context, AdminHome.id);
       } on FirebaseAuthException catch (e) {
         if (e.code == 'user-not-found') {
           coolalertfailure('No user found for that email.');

@@ -37,7 +37,7 @@ class User {
   Future createAndUpdateDocument(String mobile,String? name) {
     CollectionReference users = FirebaseFirestore.instance.collection('users');
     print(name);
-    return users.doc(mobileNumber).update({
+    return users.doc(mobileNumber).set({
       'name': name,
       'mobile': mobile,
     }).then((value) {
@@ -52,6 +52,7 @@ class User {
     CollectionReference users = FirebaseFirestore.instance.collection('users');
     await users.doc(mobileNumber).snapshots().listen((event) {
       name = event.get('name');
+      kCurrUser!.name=name;
     });
   }
 
