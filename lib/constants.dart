@@ -1,12 +1,13 @@
 // Importing Packages
 
 // Importing Models
+import 'package:covid_app/models/admin.dart';
 import 'package:covid_app/models/user.dart';
 
 // Current logged in user (by default null)
 dynamic kMobileNumber;
 User? kCurrUser;
-
+Admin? kCurrAdmin;
 // Path of profile image to be displayed
 String? kProfileImagePath;
 

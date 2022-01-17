@@ -53,6 +53,7 @@ dependencies:
   flutter_easyloading: ^3.0.3
   flutter_phoenix: ^1.0.0
   otp_text_field: ^1.1.1
+  cool_alert: ^1.1.0
 
 dev_dependencies:
   flutter_test:

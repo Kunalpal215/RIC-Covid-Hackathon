@@ -1,5 +1,6 @@
 // Importing Packages
 import 'package:covid_app/constants.dart';
+import 'package:covid_app/models/admin.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 // Importing Models
@@ -25,5 +26,13 @@ Future<void> loadUser(String mobileNumber) async {
   print('catch');
   SharedPreferences prefs = await SharedPreferences.getInstance();
   prefs.setString('mobile', mobileNumber);
+  print('catch2');
+}
+Future<void> loadAdmin(String email) async {
+  kCurrAdmin = Admin(email: email);
+
+  print('catch');
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.setString('email', email);
   print('catch2');
 }

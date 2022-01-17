@@ -1,3 +1,4 @@
+import 'package:covid_app/screens/auth/adminlogin.dart';
 import 'package:covid_app/screens/covid_map/map.dart';
 import 'package:covid_app/screens/feedback/complaint_info.dart';
 import 'package:covid_app/screens/feedback/complaint_register.dart';
@@ -70,6 +71,7 @@ class _MyAppState extends State<MyApp> {
         EditProfileScreen.id: (context) => EditProfileScreen(),
         MapScreen.id : (context) => MapScreen(),
         ComplaintScreen.id: (context) => ComplaintScreen(),
+        AdminLoginScreen.id:(context) => AdminLoginScreen(),
       },
       builder: EasyLoading.init(),
 

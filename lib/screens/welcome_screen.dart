@@ -1,4 +1,5 @@
 // Importing General Packages
+import 'package:covid_app/screens/auth/adminlogin.dart';
 import 'package:flutter/material.dart';
 
 // Importing Firebase Packages
@@ -50,7 +51,20 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 Navigator.pushNamed(context, LoginScreen.id);
               },
               child: const Text(
-                'Login',
+                'Login as user',
+                style: TextStyle(fontSize: 22.5, color: Colors.white),
+              ),
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: Colors.teal,
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+              ),
+              onPressed: () {
+                Navigator.pushNamed(context, AdminLoginScreen.id);
+              },
+              child: const Text(
+                'Login as admin',
                 style: TextStyle(fontSize: 22.5, color: Colors.white),
               ),
             )
