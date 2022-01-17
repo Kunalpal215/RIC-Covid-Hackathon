@@ -1,4 +1,6 @@
 import 'package:covid_app/screens/covid_map/map.dart';
+import 'package:covid_app/screens/feedback/complaint_info.dart';
+import 'package:covid_app/screens/feedback/complaint_register.dart';
 import 'package:flutter/material.dart';
 import 'package:covid_app/constants.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -67,6 +69,7 @@ class _MyAppState extends State<MyApp> {
         ProfileScreen.id: (context) => ProfileScreen(),
         EditProfileScreen.id: (context) => EditProfileScreen(),
         MapScreen.id : (context) => MapScreen(),
+        ComplaintScreen.id: (context) => ComplaintScreen(),
       },
       builder: EasyLoading.init(),
 

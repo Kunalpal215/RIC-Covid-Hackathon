@@ -137,7 +137,7 @@ class _MapScreenState extends State<MapScreen> {
         if (ifMapInitialized == true) {
           _googleMapController.animateCamera(CameraUpdate.newCameraPosition(
             CameraPosition(
-                target: LatLng(userPosition.latitude, userPosition.longitude),
+                target: LatLng(26.187923813940156, 91.69162631215723),
                 zoom: 14.7),
           ),);
         }
