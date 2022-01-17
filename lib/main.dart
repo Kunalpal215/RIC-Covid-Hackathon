@@ -8,6 +8,8 @@ import 'package:covid_app/screens/auth/profile_screen.dart';
 import 'package:covid_app/screens/home/admin/adminhome.dart';
 import 'package:covid_app/screens/home/user/home_screen.dart';
 import 'package:covid_app/screens/home/user/pages/announcements/announcements.dart';
+import 'package:covid_app/screens/home/user/pages/booking/myslots.dart';
+import 'package:covid_app/screens/home/user/pages/booking/slotbooking.dart';
 import 'package:covid_app/screens/home/user/pages/covid_map/map.dart';
 import 'package:covid_app/screens/home/user/pages/feedback/complaint_register.dart';
 import 'package:covid_app/screens/welcome_screen.dart';
@@ -39,8 +41,6 @@ Future<void> main() async {
   );
 }
 
-
-
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -71,7 +71,9 @@ class _MyAppState extends State<MyApp> {
         ComplaintScreen.id: (context) => ComplaintScreen(),
         AdminLoginScreen.id: (context) => AdminLoginScreen(),
         Announcements.id: (context) => Announcements(),
-        AdminHome.id: (context) => AdminHome()
+        AdminHome.id: (context) => AdminHome(),
+        SlotBooking.id: (context) => SlotBooking(),
+        MySlots.id: (context) => MySlots()
       },
     );
   }
