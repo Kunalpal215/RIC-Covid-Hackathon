@@ -78,15 +78,11 @@ class _ListAnnouncementsState extends State<ListAnnouncements> {
             storedocs.add(a);
             a['id'] = document.id;
           }).toList();
-
-          print(storedocs);
-
+          
           for (var i = 0; i < storedocs.length; i++){
             var temp = new Quote(text: storedocs[i]['announcement'] , author: storedocs[i]['author']);
             storedocs[i] = QuoteCard(quote: temp);
           }
-
-          print(storedocs);
 
           return Container(
             child: ListView.builder(
