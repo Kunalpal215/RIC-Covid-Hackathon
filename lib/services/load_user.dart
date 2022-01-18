@@ -10,23 +10,22 @@ import 'package:covid_app/services/copy_image_file.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 // Function to load sign in user's details
-Future<void> loadUser(String mobileNumber) async {
-  kCurrUser = User(mobileNumber: mobileNumber);
+Future<bool> loadUser(String mobileNumber,String? name, String? covidstatus,String? vaccinestatus) async {
+  print('${mobileNumber} ${name} ${covidstatus} ${vaccinestatus}');
+  kCurrUser = User(mobileNumber: mobileNumber,name:name,covidstatus: covidstatus,vaccinestatus: vaccinestatus);
   await kCurrUser!.loadExistence();
   if (kCurrUser!.exists) {
     await kCurrUser!.retrieveDocument();
     await kCurrUser!.downloadProfileImage();
     await kCurrUser!.uploadProfileImage();
   } else {
-    await kCurrUser!.createdocument(mobileNumber, null);
+    await kCurrUser!.createdocument(mobileNumber,name, covidstatus,vaccinestatus);
     await copyImageFile(
         'profile.png', '${kCurrUser!.mobileNumber}/profile.png');
     await kCurrUser!.downloadProfileImage();
   }
-  print('catch');
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  prefs.setString('mobile', mobileNumber);
-  print('catch2');
+  print(kCurrUser!.exists);
+  return kCurrUser!.exists;
 }
 
 Future<void> loadAdmin(String email) async {

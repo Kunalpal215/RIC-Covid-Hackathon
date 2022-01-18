@@ -1,11 +1,14 @@
 // Importing packages
 // // Importing Services
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cool_alert/cool_alert.dart';
+import 'package:covid_app/screens/auth/initial_user_update.dart';
 import 'package:covid_app/screens/home/user/home_screen.dart';
 import 'package:covid_app/services/load_user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
   static const id = '/login';
@@ -21,7 +24,7 @@ class _LoginScreenState extends State<LoginScreen> {
   String userMobileNumber = '';
   final _formKey = GlobalKey<FormState>();
   bool loading = false;
-  bool correctcred=false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,47 +35,47 @@ class _LoginScreenState extends State<LoginScreen> {
       body: loading
           ? Center(child: CircularProgressIndicator())
           : Container(
-        padding: EdgeInsets.all(5.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              SizedBox(height: 10.0),
-              InternationalPhoneNumberInput(
-                onInputChanged: (PhoneNumber number) {
-                  userMobileNumber = number.phoneNumber!;
-                  // print(userMobileNumber);
-                },
-                countries: const ['IN'],
-                selectorConfig: const SelectorConfig(
-                  setSelectorButtonAsPrefixIcon: true,
-                  leadingPadding: 20,
-                  useEmoji: true,
-                  selectorType: PhoneInputSelectorType.DROPDOWN,
+              padding: EdgeInsets.all(5.0),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    SizedBox(height: 10.0),
+                    InternationalPhoneNumberInput(
+                      onInputChanged: (PhoneNumber number) {
+                        userMobileNumber = number.phoneNumber!;
+                        // print(userMobileNumber);
+                      },
+                      countries: const ['IN'],
+                      selectorConfig: const SelectorConfig(
+                        setSelectorButtonAsPrefixIcon: true,
+                        leadingPadding: 20,
+                        useEmoji: true,
+                        selectorType: PhoneInputSelectorType.DROPDOWN,
+                      ),
+                      initialValue: number,
+                      keyboardType: const TextInputType.numberWithOptions(
+                          signed: true, decimal: true),
+                      inputBorder: const OutlineInputBorder(),
+                    ),
+                    SizedBox(height: 10.0),
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      child: ElevatedButton(
+                        onPressed: () async {
+                          if (_formKey.currentState!.validate()) {
+                            await loginUser(userMobileNumber);
+                          }
+                        },
+                        child: const Text('Get OTP'),
+                      ),
+                    )
+                  ],
                 ),
-                initialValue: number,
-                keyboardType: const TextInputType.numberWithOptions(
-                    signed: true, decimal: true),
-                inputBorder: const OutlineInputBorder(),
               ),
-              SizedBox(height: 10.0),
-              Container(
-                width: MediaQuery.of(context).size.width,
-                child: ElevatedButton(
-                  onPressed: () async {
-                    if (_formKey.currentState!.validate()) {
-                      await loginUser(userMobileNumber);
-                    }
-                  },
-                  child: const Text('Get OTP'),
-                ),
-              )
-            ],
-          ),
-        ),
-      ),
+            ),
     );
   }
 
@@ -120,7 +123,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     loading = true;
                   });
 
-                  confirmlogin(verificationId,otp,auth,mobileNumber);
+                  confirmlogin(verificationId, otp, auth, mobileNumber);
                   Navigator.of(context).pop();
                 },
               ),
@@ -154,20 +157,36 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-
-  Future<void> confirmlogin(String verificationId,String otp,var auth,String mobileNumber) async {
+  Future<void> confirmlogin(
+      String verificationId, String otp, var auth, String mobileNumber) async {
     PhoneAuthCredential credential = PhoneAuthProvider.credential(
         verificationId: verificationId, smsCode: otp);
-    await auth
-        .signInWithCredential(credential)
-        .then((value) async {
-      await loadUser(mobileNumber);
-      setState(() {
-        loading = false;
+    await auth.signInWithCredential(credential).then((value) async {
+      bool exists=false;
+      await FirebaseFirestore.instance
+          .collection('users')
+          .where('mobile', isEqualTo: mobileNumber)
+          .get()
+          .then((documentSnapshot) {
+        print(documentSnapshot.size);
+        if (documentSnapshot.size > 0) {
+          exists = true;
+        } else {
+          exists = false;
+        }
       });
-      correctcred=true;
-      Navigator.of(context).pop();
-      Navigator.of(context).pushReplacementNamed(HomeScreen.id);
+      if (!exists) {
+        showDialog(
+            barrierDismissible: false,
+            context: context,
+            builder: (BuildContext context) {
+              return InitialUserUpdate(mobileNumber:mobileNumber
+              );
+            });
+      } else {
+        await loadUser(mobileNumber,null,null,null);
+        routescreen(mobileNumber);
+      }
     }).catchError((err) {
       print(err.toString());
       coolalertfailure('OTP invalid');
@@ -175,6 +194,14 @@ class _LoginScreenState extends State<LoginScreen> {
         loading = false;
       });
     });
+  }
+
+  Future<void> routescreen(String mobileNumber) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('mobile', mobileNumber);
+    print(mobileNumber);
+    Navigator.of(context).pop();
+    Navigator.of(context).pushReplacementNamed(HomeScreen.id);
   }
 
   coolalertsuccess(String text) {

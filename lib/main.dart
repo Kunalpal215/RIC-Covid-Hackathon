@@ -2,7 +2,6 @@ import 'package:covid_app/constants.dart';
 import 'package:covid_app/models/admin.dart';
 import 'package:covid_app/models/user.dart';
 import 'package:covid_app/screens/auth/adminlogin.dart';
-import 'package:covid_app/screens/auth/edit_profile_screen.dart';
 import 'package:covid_app/screens/auth/login_screen.dart';
 import 'package:covid_app/screens/auth/profile_screen.dart';
 import 'package:covid_app/screens/home/admin/adminhome.dart';
@@ -67,7 +66,6 @@ class _MyAppState extends State<MyApp> {
         LoginScreen.id: (context) => const LoginScreen(),
         HomeScreen.id: (context) => const HomeScreen(),
         ProfileScreen.id: (context) => ProfileScreen(),
-        EditProfileScreen.id: (context) => EditProfileScreen(),
         MapScreen.id: (context) => MapScreen(),
         ComplaintScreen.id: (context) => ComplaintScreen(),
         AdminLoginScreen.id: (context) => AdminLoginScreen(),

@@ -3,7 +3,10 @@
 import 'dart:io';
 
 import 'package:covid_app/constants.dart';
+import 'package:covid_app/services/load_user.dart';
+import 'package:covid_app/services/pick_image.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ProfileScreen extends StatefulWidget {
   static const id = '/profile';
@@ -22,12 +25,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
   TextEditingController phonecontroller = TextEditingController();
   TextEditingController vaccineController = TextEditingController();
   TextEditingController covidStatusController = TextEditingController();
+  final keys = GlobalKey<FormState>();
+  File image = File(kProfileImagePath!);
 
   @override
   void initState() {
-    namecontroller.text=kCurrUser!.name!;
-    phonecontroller.text=kCurrUser!.mobileNumber;
+    namecontroller.text = kCurrUser!.name!;
+    phonecontroller.text = kCurrUser!.mobileNumber;
+    dropdownvaluevaccinestatus=kCurrUser!.vaccinestatus!;
+    dropdownvaluecovidstatus=kCurrUser!.covidstatus!;
   }
+
+  var covis_status = ['positive', 'negative'];
+  var vaccine_status = ['zero', 'single', 'double', 'third'];
+ late String dropdownvaluevaccinestatus;
+late  String dropdownvaluecovidstatus ;
 
   @override
   Widget build(BuildContext context) {
@@ -36,130 +48,165 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ? Center(
               child: CircularProgressIndicator(),
             )
-          : Container(
-              color: Colors.white,
-              child: ListView(
-                children: <Widget>[
-                  Container(
-                    color: Color(0xffFFFFFF),
-                    child: Padding(
-                      padding: EdgeInsets.only(bottom: 25.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: <Widget>[
-                          Padding(
-                            padding: EdgeInsets.only(left: 25.0, top: 25.0),
-                            child: CircleAvatar(
-                              radius: 50.0,
-                              backgroundColor: const Color(0xFF778899),
-                              backgroundImage: FileImage(
-                                File(kProfileImagePath!),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                              padding: EdgeInsets.only(
-                                  left: 25.0, right: 25.0, top: 5.0),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                mainAxisSize: MainAxisSize.max,
-                                children: <Widget>[
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: const <Widget>[
-                                      Text(
-                                        'Name',
-                                        style: TextStyle(
-                                            fontSize: 16.0,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ],
-                                  ),
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: <Widget>[
-                                      _status ? _getEditIcon() : Container(),
-                                    ],
-                                  )
-                                ],
-                              )),
-                          Padding(
-                            padding: EdgeInsets.only(
-                                left: 25.0, right: 25.0, top: 2.0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: <Widget>[
-                                Flexible(
-                                  child: TextFormField(
-                                    controller: namecontroller,
-                                    decoration: const InputDecoration(
-                                      hintText: "Enter Your Name",
-                                    ),
-                                    enabled: !_status,
-                                    autofocus: !_status,
+          : Form(
+              key: keys,
+              child: Container(
+                child: ListView(
+                  children: <Widget>[
+                    Container(
+                      child: Padding(
+                        padding: EdgeInsets.only(bottom: 10.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            if (_status)
+                              Padding(
+                                padding: EdgeInsets.only(left: 10.0, top: 10.0),
+                                child: CircleAvatar(
+                                  radius: 50.0,
+                                  backgroundColor: const Color(0xFF778899),
+                                  backgroundImage: FileImage(
+                                    File(image.path),
                                   ),
                                 ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                              padding: EdgeInsets.only(
-                                  left: 25.0, right: 25.0, top: 25.0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                children: <Widget>[
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: const <Widget>[
-                                      Text(
-                                        'Mobile',
-                                        style: TextStyle(
-                                            fontSize: 16.0,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ],
+                              ),
+                            if (!_status)
+                              Padding(
+                                padding: EdgeInsets.only(left: 10.0, top: 10.0),
+                                child: CircleAvatar(
+                                  radius: 50.0,
+                                  backgroundImage: FileImage(
+                                    File(image.path),
                                   ),
-                                ],
-                              )),
-                          Padding(
+                                  child: Container(
+                                    width: 100,
+                                    height: 100,
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(50.0),
+                                        color: const Color(0xFF532601)
+                                            .withOpacity(0.7)),
+                                    child: Center(
+                                      child: IconButton(
+                                        icon: Icon(Icons.camera_alt_outlined),
+                                        iconSize: 48.0,
+                                        color: Colors.white,
+                                        onPressed: () async {
+                                          final PickedFile newImage =
+                                              await pickImageFromGallery();
+                                          setState(() {
+                                            if (newImage != null) {
+                                              image = File(newImage.path);
+                                            }
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            Padding(
+                                padding: EdgeInsets.only(
+                                    left: 10.0, right: 10.0, top: 5.0),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: <Widget>[
+                                    Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: const <Widget>[
+                                        Text(
+                                          'Name',
+                                          style: TextStyle(
+                                              fontSize: 16.0,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ],
+                                    ),
+                                    Column(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: <Widget>[
+                                        _status ? _getEditIcon() : Container(),
+                                      ],
+                                    )
+                                  ],
+                                )),
+                            Padding(
                               padding: EdgeInsets.only(
-                                  left: 25.0, right: 25.0, top: 2.0),
+                                  left: 10.0, right: 10.0, top: 2.0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
                                 children: <Widget>[
                                   Flexible(
                                     child: TextFormField(
-                                      controller:phonecontroller,
+                                      controller: namecontroller,
                                       decoration: const InputDecoration(
-                                          hintText: "Enter Mobile Number"),
-                                      enabled:false,
+                                        hintText: "Enter Your Name",
+                                      ),
+                                      enabled: !_status,
+                                      autofocus: !_status,
                                     ),
                                   ),
                                 ],
-                              )),
-                          Padding(
-                              padding: EdgeInsets.only(
-                                  left: 25.0, right: 25.0, top: 25.0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: <Widget>[
-                                  Expanded(
-                                    child: Text(
+                              ),
+                            ),
+                            Padding(
+                                padding: EdgeInsets.only(
+                                    left: 10.0, right: 10.0, top: 10.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: <Widget>[
+                                    Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: const <Widget>[
+                                        Text(
+                                          'Mobile',
+                                          style: TextStyle(
+                                              fontSize: 16.0,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                )),
+                            Padding(
+                                padding: EdgeInsets.only(
+                                    left: 10.0, right: 10.0, top: 2.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: <Widget>[
+                                    Flexible(
+                                      child: TextFormField(
+                                        controller: phonecontroller,
+                                        decoration: const InputDecoration(
+                                            hintText: "Enter Mobile Number"),
+                                        enabled: false,
+                                      ),
+                                    ),
+                                  ],
+                                )),
+                            Padding(
+                                padding: EdgeInsets.only(
+                                    left: 10.0, right: 10.0, top: 10.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Text(
                                       'Covid Status',
                                       style: TextStyle(
                                           fontSize: 16.0,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    flex: 2,
-                                  ),
-                                  Expanded(
-                                    child: Container(
+                                    Container(
                                       child: Text(
                                         'Vaccine Status',
                                         style: TextStyle(
@@ -167,45 +214,87 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             fontWeight: FontWeight.bold),
                                       ),
                                     ),
-                                    flex: 2,
-                                  ),
-                                ],
-                              )),
-                          Padding(
+                                  ],
+                                )),
+                            Padding(
                               padding: EdgeInsets.only(
-                                  left: 25.0, right: 25.0, top: 2.0),
+                                  left: 10.0, right: 10.0, top: 2.0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.start,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
                                   Flexible(
-                                    child: Padding(
-                                      padding: EdgeInsets.only(right: 10.0),
-                                      child: TextField(
-                                        decoration: const InputDecoration(
-                                            hintText: "Enter Pin Code"),
-                                        enabled: !_status,
+                                    child: IgnorePointer(
+                                      ignoring: _status,
+                                      child: DropdownButton<String>(
+                                        // Initial Value
+                                        value: dropdownvaluecovidstatus,
+
+                                        // Down Arrow Icon
+                                        icon: const Icon(
+                                            Icons.keyboard_arrow_down),
+
+                                        // Array list of items
+                                        items: covis_status.map((String items) {
+                                          return DropdownMenuItem(
+                                            value: items,
+                                            child: Text(items),
+                                          );
+                                        }).toList(),
+                                        // After selecting the desired option,it will
+                                        // change button value to selected value
+                                        onChanged: (String? newValue) {
+                                          setState(() {
+                                            dropdownvaluecovidstatus =
+                                                newValue!;
+                                          });
+                                        },
                                       ),
                                     ),
                                     flex: 2,
                                   ),
                                   Flexible(
-                                    child: TextField(
-                                      decoration: const InputDecoration(
-                                          hintText: "Vaccine Status"),
-                                      enabled: !_status,
+                                    child: IgnorePointer(
+                                      ignoring: _status,
+                                      child: DropdownButton<String>(
+                                        // Initial Value
+                                        value: dropdownvaluevaccinestatus,
+
+                                        // Down Arrow Icon
+                                        icon: const Icon(
+                                            Icons.keyboard_arrow_down),
+
+                                        // Array list of items
+                                        items:
+                                            vaccine_status.map((String items) {
+                                          return DropdownMenuItem(
+                                            value: items,
+                                            child: Text(items),
+                                          );
+                                        }).toList(),
+                                        // After selecting the desired option,it will
+                                        // change button value to selected value
+                                        onChanged: (String? newValue) {
+                                          setState(() {
+                                            dropdownvaluevaccinestatus =
+                                                newValue!;
+                                          });
+                                        },
+                                      ),
                                     ),
-                                    flex: 2,
                                   ),
                                 ],
-                              )),
-                          !_status ? _getActionButtons() : Container(),
-                          SizedBox(height: 40),
-                        ],
+                              ),
+                            ),
+                            !_status ? _getActionButtons() : Container(),
+                            SizedBox(height: 40),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
     );
@@ -220,7 +309,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Widget _getActionButtons() {
     return Padding(
-      padding: EdgeInsets.only(left: 25.0, right: 25.0, top: 45.0),
+      padding: EdgeInsets.only(left: 10.0, right: 10.0, top: 45.0),
       child: Row(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.start,
@@ -232,10 +321,34 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 child: Text("Save"),
                 textColor: Colors.white,
                 color: Colors.green,
-                onPressed: () {
+                onPressed: () async {
                   setState(() {
                     _status = true;
+
                     FocusScope.of(context).requestFocus(FocusNode());
+                    loading = true;
+                  });
+                  kCurrUser!.name = namecontroller.text;
+                  kCurrUser!.covidstatus = dropdownvaluecovidstatus;
+                  kCurrUser!.vaccinestatus = dropdownvaluevaccinestatus;
+                  await kCurrUser!.updatedocument(
+                      kCurrUser!.mobileNumber,
+                      namecontroller.text,
+                      dropdownvaluecovidstatus,
+                      dropdownvaluevaccinestatus);
+                  print('1');
+                  await kCurrUser!.retrieveDocument();
+                  print('2');
+                  await image.copy(kProfileImagePath!);
+                  print('3');
+                  await kCurrUser!.uploadProfileImage();
+                  print('4');
+                  await kCurrUser!.downloadProfileImage();
+                  print('5');
+                  await loadUser(kCurrUser!.mobileNumber,null,null,null);
+                  print('6');
+                  setState(() {
+                    loading = false;
                   });
                 },
                 shape: RoundedRectangleBorder(
@@ -272,7 +385,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget _getEditIcon() {
     return GestureDetector(
       child: CircleAvatar(
-        backgroundColor: Colors.teal[400],
+        backgroundColor: Colors.amberAccent,
         radius: 14.0,
         child: Icon(
           Icons.edit,
