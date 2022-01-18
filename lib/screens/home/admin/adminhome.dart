@@ -1,4 +1,5 @@
 import 'package:covid_app/screens/home/admin/announcement.dart';
+import 'package:covid_app/screens/home/admin/complaints/complaint_list.dart';
 import 'package:covid_app/screens/welcome_screen.dart';
 import 'package:covid_app/services/logout_user.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,13 @@ class _AdminHomeState extends State<AdminHome> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ElevatedButton(
-              onPressed: () async {
+              onPressed: (){
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => ComplaintListAdminScreen()));
+              },
+              child: Text('Complaints Section'),
+            ),
+            ElevatedButton(
+              onPressed: (){
                 Navigator.of(context).push(MaterialPageRoute(builder: (context) => AnnouncementMakeScreen()));
               },
               child: Text('Make an announcement'),
@@ -35,7 +42,6 @@ class _AdminHomeState extends State<AdminHome> {
           ],
         ),
       ),
-
     );
   }
 }
