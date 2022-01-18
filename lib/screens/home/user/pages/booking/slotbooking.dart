@@ -6,8 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class SlotBooking extends StatefulWidget {
-  const SlotBooking({Key? key}) : super(key: key);
   static const id = '/slotbooking';
+  static const title='Book a slot';
+  const SlotBooking({Key? key}) : super(key: key);
 
   @override
   _SlotBookingState createState() => _SlotBookingState();

@@ -18,7 +18,7 @@ Future<void> loadUser(String mobileNumber) async {
     await kCurrUser!.downloadProfileImage();
     await kCurrUser!.uploadProfileImage();
   } else {
-    await kCurrUser!.createAndUpdateDocument(mobileNumber, null);
+    await kCurrUser!.createdocument(mobileNumber, null);
     await copyImageFile(
         'profile.png', '${kCurrUser!.mobileNumber}/profile.png');
     await kCurrUser!.downloadProfileImage();

@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ComplaintListScreen extends StatefulWidget {
+  static const title='My Complaints';
   const ComplaintListScreen({Key? key}) : super(key: key);
 
   @override

@@ -1,15 +1,16 @@
 import 'dart:io';
 
+import 'package:cool_alert/cool_alert.dart';
 import 'package:covid_app/constants.dart';
 import 'package:covid_app/screens/auth/profile_screen.dart';
+import 'package:covid_app/screens/home/user/pages/Covid_Cases/cases_info.dart';
 import 'package:covid_app/screens/home/user/pages/announcements/announcements.dart';
 import 'package:covid_app/screens/home/user/pages/booking/slotbooking.dart';
 import 'package:covid_app/screens/home/user/pages/feedback/complaint_list.dart';
 import 'package:covid_app/screens/home/user/pages/landing/landing.dart';
 import 'package:covid_app/screens/welcome_screen.dart';
+import 'package:covid_app/services/logout_user.dart';
 import 'package:flutter/material.dart';
-import 'package:covid_app/screens/home/user/pages/Covid_Cases/cases_info.dart';
-
 
 class HomeScreen extends StatefulWidget {
   static const id = '/home';
@@ -22,13 +23,29 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int curIdx = 0;
-  List Screens = [HomePageLanding(), SlotBooking(),ComplaintListScreen(), ProfileScreen(), Announcements(), WelcomeScreen(), Cases_info()];
+  List Screens = [
+    HomePageLanding(),
+    SlotBooking(),
+    ComplaintListScreen(),
+    ProfileScreen(),
+    Announcements(),
+    Cases_info()
+  ];
+  List Screentitle = [
+    HomePageLanding.title,
+    SlotBooking.title,
+    ComplaintListScreen.title,
+    ProfileScreen.title,
+    Announcements.title,
+    Cases_info.title
+  ];
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Covid Management App'),
+        title: Text(Screentitle[curIdx]),
       ),
       drawer: SafeArea(
         child: Drawer(
@@ -46,12 +63,26 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 otherAccountsPictures: [
-                  IconButton(onPressed: (){
-                    setState(() {
-                      curIdx=5;
-                    });
-                    Navigator.pop(context);
-                  }, icon: Icon(Icons.logout))
+                  IconButton(
+                      onPressed: () async {
+                        Navigator.pop(context);
+                        CoolAlert.show(
+                          context: context,
+                          barrierDismissible: false,
+                          type: CoolAlertType.confirm,
+                          text: 'Do you want to logout',
+                          confirmBtnText: 'Yes',
+                          cancelBtnText: 'No',
+                          onConfirmBtnTap: () async {
+                            await logoutUser();
+                            Navigator.pushReplacementNamed(
+                                context, WelcomeScreen.id);
+                          },
+                          confirmBtnColor: Colors.orange,
+                          backgroundColor: Color(0xFFFDE1AB),
+                        );
+                      },
+                      icon: Icon(Icons.logout))
                 ],
               ),
 
@@ -78,7 +109,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       title: Text("Covid Status"),
                       onTap: () {
                         setState(() {
-                          curIdx = 6;
+                          curIdx = 5;
                         });
                         Navigator.pop(context);
                       },
@@ -88,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   InkWell(
                     child: ListTile(
                       leading: Icon(Icons.add_box_outlined),
-                      title: Text("Book"),
+                      title: Text("Book a slot"),
                       onTap: () {
                         setState(() {
                           curIdx = 1;
@@ -160,4 +191,6 @@ class _HomeScreenState extends State<HomeScreen> {
       // ),
     );
   }
+
+
 }

@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../welcome_screen.dart';
 class HomePageLanding extends StatefulWidget {
+  static const title = 'Covid Management App';
   const HomePageLanding({Key? key}) : super(key: key);
 
   @override
@@ -28,7 +29,7 @@ class _HomePageLandingState extends State<HomePageLanding> {
             decoration: BoxDecoration(
               color: Colors.white,
 
-              boxShadow: [BoxShadow(
+              boxShadow: const [BoxShadow(
               color: Colors.grey,
               blurRadius: 5.0,
             ),]

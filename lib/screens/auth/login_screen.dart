@@ -47,6 +47,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 },
                 countries: const ['IN'],
                 selectorConfig: const SelectorConfig(
+                  setSelectorButtonAsPrefixIcon: true,
+                  leadingPadding: 20,
+                  useEmoji: true,
                   selectorType: PhoneInputSelectorType.DROPDOWN,
                 ),
                 initialValue: number,

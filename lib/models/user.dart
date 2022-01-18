@@ -1,5 +1,6 @@
 // Importing packages
 import 'package:covid_app/constants.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 
@@ -34,24 +35,38 @@ class User {
   }
 
   // Creates and updates documents in Firestore collection 'users' for this user
-  Future createAndUpdateDocument(String mobile,String? name) {
+  Future createdocument(String mobile,String? name) {
     CollectionReference users = FirebaseFirestore.instance.collection('users');
     print(name);
-    return users.doc(mobileNumber).set({
-      'name': name,
-      'mobile': mobile,
-    }).then((value) {
-      // print('New document created / updated for user');
-    }).catchError((e) {
-      // print(e.toString());
-    });
+     print(mobile);
+      return users.doc(mobile).set({
+        'name': name,
+        'mobile': mobile,
+        'position':GeoPoint(0, 0)
+      }).then((value) {
+        print('New document created / updated for user');
+      }).catchError((e) {print(e.toString());
+      });
+
   }
+
+Future updatedocument(String mobile,String? name) {
+  CollectionReference users = FirebaseFirestore.instance.collection('users');
+  return users.doc(mobile).update({
+    'name': name,
+    'mobile': mobile,
+  }).then((value) {
+    // print('New document created / updated for user');
+  }).catchError((e) {
+    // print(e.toString());
+  });
+}
 
   // Retrieves data from user's document in Cloud Firestore
   Future retrieveDocument() async {
     CollectionReference users = FirebaseFirestore.instance.collection('users');
-    await users.doc(mobileNumber).snapshots().listen((event) {
-      name = event.get('name');
+    await users.where('mobile',isEqualTo: mobileNumber).snapshots().listen((event) {
+      name = event.docs.first['name'];
       kCurrUser!.name=name;
     });
   }

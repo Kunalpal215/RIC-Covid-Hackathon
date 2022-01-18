@@ -89,7 +89,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         ),
         onPressed: () async{
           print(kCurrUser!.name );
-          await kCurrUser!.createAndUpdateDocument(kCurrUser!.mobileNumber,kCurrUser!.name!);
+          await kCurrUser!.updatedocument(kCurrUser!.mobileNumber,kCurrUser!.name!);
           print('1');
           await kCurrUser!.retrieveDocument();
           print('2');

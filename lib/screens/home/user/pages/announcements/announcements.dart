@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class Announcements extends StatefulWidget {
   static const id = '/announcements';
-
+  static const title='All Announcements';
   Announcements({Key? key}) : super(key: key);
 
   @override
@@ -16,9 +16,6 @@ class _AnnouncementsState extends State<Announcements> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Announcements'),
-      ),
       body: ListAnnouncements(),
     );
   }
