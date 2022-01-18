@@ -1,3 +1,4 @@
+import 'package:covid_app/screens/home/admin/announcement.dart';
 import 'package:covid_app/screens/welcome_screen.dart';
 import 'package:covid_app/services/logout_user.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,12 @@ class _AdminHomeState extends State<AdminHome> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-
+            ElevatedButton(
+              onPressed: () async {
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => AnnouncementMakeScreen()));
+              },
+              child: Text('Make an announcement'),
+            ),
             ElevatedButton(
               onPressed: () async {
                 await logoutAdmin();
