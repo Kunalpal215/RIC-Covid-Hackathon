@@ -40,7 +40,7 @@ class _SlotBookingState extends State<SlotBooking> {
               List<QueryDocumentSnapshot> docs = snapshot.data!.docs;
               if (docs.isEmpty) {
                 return Center(
-                    child: Text("No complaints registered from you!"));
+                    child: Text("No Slots are available this time !"));
               }
               return ListView.builder(
                 itemCount: docs.length + 1,
