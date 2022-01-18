@@ -30,9 +30,6 @@ class _AnnouncementMakeScreenState extends State<AnnouncementMakeScreen> {
                 ),
                 keyboardType: TextInputType.text,
                 controller: authorController,
-                // onChanged: (value){
-                //   subject=value;
-                // },
                 validator: (value){
                   if(value==null || value.isEmpty) return "This field can't be null";
                   return null;
@@ -66,9 +63,6 @@ class _AnnouncementMakeScreenState extends State<AnnouncementMakeScreen> {
                 ),
                 keyboardType: TextInputType.text,
                 controller: textController,
-                // onChanged: (value){
-                //   text=value;
-                // },
                 validator: (value){
                   if(value==null || value.isEmpty) return "This field can't be null";
                   return null;
