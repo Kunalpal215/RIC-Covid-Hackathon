@@ -6,8 +6,10 @@ class Quote {
 
   String text;
   String author;
+  String Subject;
+  DateTime time;
 
-  Quote({ required this.text, required this.author });
+  Quote({required this.Subject, required this.text, required this.author,required this.time });
 }
 
 class QuoteCard extends StatelessWidget {
@@ -25,15 +27,30 @@ class QuoteCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Text(
-                quote.text,
+                quote.Subject,
                 style: TextStyle(
                   fontSize: 18.0,
                   color: Colors.grey[600],
                 ),
               ),
               SizedBox(height: 6.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("From : " +
+                    quote.author,
+                    style: TextStyle(
+                      fontSize: 14.0,
+                      color: Colors.grey[800],
+                      fontWeight: FontWeight.w600
+                    ),
+                  ),
+                  Text(quote.time.day.toString()+"/"+quote.time.month.toString()+"/"+quote.time.year.toString()),
+                ],
+              ),
+              SizedBox(height: 6.0),
               Text(
-                quote.author,
+                quote.text,
                 style: TextStyle(
                   fontSize: 14.0,
                   color: Colors.grey[800],
@@ -80,7 +97,7 @@ class _ListAnnouncementsState extends State<ListAnnouncements> {
           }).toList();
           
           for (var i = 0; i < storedocs.length; i++){
-            var temp = new Quote(text: storedocs[i]['announcement'] , author: storedocs[i]['author']);
+            var temp = new Quote(Subject: storedocs[i]['subject'],text: storedocs[i]['announcement'] , author: storedocs[i]['author'], time: storedocs[i]['TimeStamp'].toDate());
             storedocs[i] = QuoteCard(quote: temp);
           }
 
