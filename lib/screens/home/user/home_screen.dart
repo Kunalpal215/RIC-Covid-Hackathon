@@ -2,9 +2,11 @@ import 'dart:io';
 
 import 'package:covid_app/constants.dart';
 import 'package:covid_app/screens/auth/profile_screen.dart';
+import 'package:covid_app/screens/home/user/pages/announcements/announcements.dart';
 import 'package:covid_app/screens/home/user/pages/booking/slotbooking.dart';
 import 'package:covid_app/screens/home/user/pages/feedback/complaint_list.dart';
 import 'package:covid_app/screens/home/user/pages/landing/landing.dart';
+import 'package:covid_app/screens/welcome_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -18,7 +20,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int curIdx = 0;
-  List Screens = [HomePageLanding(), SlotBooking(),ComplaintListScreen(), ProfileScreen()];
+  List Screens = [HomePageLanding(), SlotBooking(),ComplaintListScreen(), ProfileScreen(), Announcements(), WelcomeScreen()];
 
   @override
   Widget build(BuildContext context) {
@@ -44,10 +46,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 otherAccountsPictures: [
                   IconButton(onPressed: (){
                     setState(() {
-                      curIdx=Screens.length-1;
+                      curIdx=5;
                     });
                     Navigator.pop(context);
-                  }, icon: Icon(Icons.edit))
+                  }, icon: Icon(Icons.logout))
                 ],
               ),
 
@@ -83,11 +85,35 @@ class _HomeScreenState extends State<HomeScreen> {
                   // Academics -->
                   InkWell(
                     child: ListTile(
-                      leading: Icon(Icons.message),
+                      leading: Icon(Icons.message_outlined),
                       title: Text("Complaints"),
                       onTap: () {
                         setState(() {
                           curIdx = 2;
+                        });
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ),
+                  InkWell(
+                    child: ListTile(
+                      leading: Icon(Icons.fiber_new_outlined),
+                      title: Text("Announcements"),
+                      onTap: () {
+                        setState(() {
+                          curIdx = 4;
+                        });
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ),
+                  InkWell(
+                    child: ListTile(
+                      leading: Icon(Icons.supervised_user_circle_outlined),
+                      title: Text("Profile"),
+                      onTap: () {
+                        setState(() {
+                          curIdx = 3;
                         });
                         Navigator.pop(context);
                       },

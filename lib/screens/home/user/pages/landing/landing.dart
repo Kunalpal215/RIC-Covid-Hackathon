@@ -15,38 +15,83 @@ class HomePageLanding extends StatefulWidget {
 class _HomePageLandingState extends State<HomePageLanding> {
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
     return Center(
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          ElevatedButton(
-            onPressed: (){
-              Navigator.pushNamed(context, MapScreen.id);
-            },
-            child: Text('Covid Map'),
-          ),
-          ElevatedButton(
-            onPressed: () async {
-              Navigator.pushNamed(context, ProfileScreen.id);
+          Container(
+            height: 200,
+            padding: EdgeInsets.all(10),
+            margin: EdgeInsets.fromLTRB(15, 25, 15, 20),
+            decoration: BoxDecoration(
+              color: Colors.white,
 
-            },
-            child: Text('profile'),
+              boxShadow: [BoxShadow(
+              color: Colors.grey,
+              blurRadius: 5.0,
+            ),]
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Container(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "56",
+                        style: TextStyle(
+                          fontSize: 38
+                        ),
+                      ),
+                      SizedBox(height: 15),
+                      Text(
+                        "Active Cases",
+                        style: TextStyle(
+                            fontSize: 22
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                Container(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "12",
+                        style: TextStyle(
+                            fontSize: 38
+                        ),
+                      ),
+                      SizedBox(height: 15),
+                      Text(
+                        "Negative cases",
+                        style: TextStyle(
+                            fontSize: 22
+                        ),
+                      )
+                    ],
+                  ),
+                )
+              ],
+            )
           ),
-          ElevatedButton(
-            onPressed: () async {
-              Navigator.pushNamed(context, Announcements.id);
-
-            },
-            child: Text('Announcements'),
-          ),
-          ElevatedButton(
-            onPressed: () async {
-              await logoutUser();
-              Navigator.pushReplacementNamed(context, WelcomeScreen.id);
-
-            },
-            child: Text('Logout'),
-          ),
+      GestureDetector(
+          onTap: ()=>Navigator.pushNamed(context,MapScreen.id),
+          child: Container(
+            color: Color(0xFFF8BE4B),
+            width: screenWidth,
+            height: screenWidth * 0.15,
+            margin: EdgeInsets.all(10.0),
+            child: Center(
+              child: Text(
+                'VIEW COVID MAP',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ),
+          ))
         ],
       ),
     );

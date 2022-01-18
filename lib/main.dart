@@ -59,7 +59,7 @@ class _MyAppState extends State<MyApp> {
               ? const HomeScreen()
               : const AdminHome(),
       theme: ThemeData(
-        primarySwatch: Colors.orange,
+        primarySwatch: Colors.amber,
       ),
       routes: {
         WelcomeScreen.id: (context) => const WelcomeScreen(),
