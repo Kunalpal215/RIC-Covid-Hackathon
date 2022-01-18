@@ -12,7 +12,3 @@ Admin? kCurrAdmin;
 // Path of profile image to be displayed
 String? kProfileImagePath;
 
-// Content to share for invite a friend
-String kShareSubject = 'Friend Invite';
-String kShareText =
-    'Hey! I invite you to join Food App. Join now using this link https://locationtrackerapp.page.link/register-now';

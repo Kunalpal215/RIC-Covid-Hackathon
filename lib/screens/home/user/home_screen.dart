@@ -4,7 +4,6 @@ import 'package:cool_alert/cool_alert.dart';
 import 'package:covid_app/constants.dart';
 import 'package:covid_app/screens/auth/profile_screen.dart';
 import 'package:covid_app/screens/home/user/pages/Covid_Cases/cases_info.dart';
-import 'package:covid_app/screens/home/user/pages/announcements/announcements.dart';
 import 'package:covid_app/screens/home/user/pages/booking/slotbooking.dart';
 import 'package:covid_app/screens/home/user/pages/feedback/complaint_list.dart';
 import 'package:covid_app/screens/home/user/pages/landing/landing.dart';
@@ -28,7 +27,6 @@ class _HomeScreenState extends State<HomeScreen> {
     SlotBooking(),
     ComplaintListScreen(),
     ProfileScreen(),
-    Announcements(),
     Cases_info()
   ];
   List Screentitle = [
@@ -36,7 +34,6 @@ class _HomeScreenState extends State<HomeScreen> {
     SlotBooking.title,
     ComplaintListScreen.title,
     ProfileScreen.title,
-    Announcements.title,
     Cases_info.title
   ];
 
@@ -109,18 +106,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   // Courses -->
 
-                  InkWell(
-                    child: ListTile(
-                      leading: Icon(Icons.apartment),
-                      title: Text("Covid Status"),
-                      onTap: () {
-                        setState(() {
-                          curIdx = 5;
-                        });
-                        Navigator.pop(context);
-                      },
-                    ),
-                  ),
 
                   InkWell(
                     child: ListTile(
@@ -148,18 +133,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       },
                     ),
                   ),
-                  InkWell(
-                    child: ListTile(
-                      leading: Icon(Icons.fiber_new_outlined),
-                      title: Text("Announcements"),
-                      onTap: () {
-                        setState(() {
-                          curIdx = 4;
-                        });
-                        Navigator.pop(context);
-                      },
-                    ),
-                  ),
+
                   InkWell(
                     child: ListTile(
                       leading: Icon(Icons.supervised_user_circle_outlined),
@@ -172,6 +146,19 @@ class _HomeScreenState extends State<HomeScreen> {
                       },
                     ),
                   ),
+                  InkWell(
+                    child: ListTile(
+                      leading: Icon(Icons.apartment),
+                      title: Text("Covid Status"),
+                      onTap: () {
+                        setState(() {
+                          curIdx = 4;
+                        });
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ),
+
                   // Job Updates -->
                 ],
               ),
@@ -180,21 +167,6 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       body: Screens[curIdx],
-      // bottomNavigationBar: BottomNavigationBar(
-      //   currentIndex: curIdx,
-      //   onTap: (index) => setState(() {
-      //     curIdx = index;
-      //   }),
-      //   items: const [
-      //     BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-      //     BottomNavigationBarItem(
-      //         icon: Icon(Icons.add_circle_sharp), label: "Book"),
-      //     BottomNavigationBarItem(
-      //         icon: Icon(Icons.message), label: "Complaints"),
-      //     BottomNavigationBarItem(
-      //         icon: Icon(Icons.person), label: "Profile"),
-      //   ],
-      // ),
     );
   }
 

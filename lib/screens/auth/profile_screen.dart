@@ -32,14 +32,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void initState() {
     namecontroller.text = kCurrUser!.name!;
     phonecontroller.text = kCurrUser!.mobileNumber;
-    dropdownvaluevaccinestatus=kCurrUser!.vaccinestatus!;
-    dropdownvaluecovidstatus=kCurrUser!.covidstatus!;
+    dropdownvaluevaccinestatus = kCurrUser!.vaccinestatus!;
+    dropdownvaluecovidstatus = kCurrUser!.covidstatus!;
   }
 
   var covis_status = ['positive', 'negative'];
   var vaccine_status = ['zero', 'single', 'double', 'third'];
- late String dropdownvaluevaccinestatus;
-late  String dropdownvaluecovidstatus ;
+  late String dropdownvaluevaccinestatus;
+  late String dropdownvaluecovidstatus;
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +77,7 @@ late  String dropdownvaluecovidstatus ;
                                 child: CircleAvatar(
                                   radius: 50.0,
                                   backgroundImage: FileImage(
-                                    File(image.path),
+                                    image,
                                   ),
                                   child: Container(
                                     width: 100,
@@ -322,34 +322,34 @@ late  String dropdownvaluecovidstatus ;
                 textColor: Colors.white,
                 color: Colors.green,
                 onPressed: () async {
-                  setState(() {
-                    _status = true;
+                  if (keys.currentState!.validate()) {
+                    setState(() {
+                      _status = true;
 
-                    FocusScope.of(context).requestFocus(FocusNode());
-                    loading = true;
-                  });
-                  kCurrUser!.name = namecontroller.text;
-                  kCurrUser!.covidstatus = dropdownvaluecovidstatus;
-                  kCurrUser!.vaccinestatus = dropdownvaluevaccinestatus;
-                  await kCurrUser!.updatedocument(
-                      kCurrUser!.mobileNumber,
-                      namecontroller.text,
-                      dropdownvaluecovidstatus,
-                      dropdownvaluevaccinestatus);
-                  print('1');
-                  await kCurrUser!.retrieveDocument();
-                  print('2');
-                  await image.copy(kProfileImagePath!);
-                  print('3');
-                  await kCurrUser!.uploadProfileImage();
-                  print('4');
-                  await kCurrUser!.downloadProfileImage();
-                  print('5');
-                  await loadUser(kCurrUser!.mobileNumber,null,null,null);
-                  print('6');
-                  setState(() {
-                    loading = false;
-                  });
+                      FocusScope.of(context).requestFocus(FocusNode());
+                      loading = true;
+                    });
+                    kCurrUser!.name = namecontroller.text;
+                    kCurrUser!.covidstatus = dropdownvaluecovidstatus;
+                    kCurrUser!.vaccinestatus = dropdownvaluevaccinestatus;
+                    await kCurrUser!.updatedocument(
+                        kCurrUser!.mobileNumber,
+                        namecontroller.text,
+                        dropdownvaluecovidstatus,
+                        dropdownvaluevaccinestatus);
+                    print('1');
+                    await kCurrUser!.retrieveDocument();
+                    print('2');
+                    await image.copy(kProfileImagePath!);
+                    await kCurrUser!.uploadProfileImage();
+                    await kCurrUser!.downloadProfileImage();
+                    print('5');
+                    await loadUser(kCurrUser!.mobileNumber, null, null, null);
+                    print('6');
+                    setState(() {
+                      loading = false;
+                    });
+                  }
                 },
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20.0)),

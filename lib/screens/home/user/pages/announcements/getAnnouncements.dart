@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-class Quote {
+class Announcement {
 
   String text;
   String author;
   String Subject;
   DateTime time;
 
-  Quote({required this.Subject, required this.text, required this.author,required this.time });
+  Announcement({required this.Subject, required this.text, required this.author,required this.time });
 }
 
 class QuoteCard extends StatelessWidget {
 
-  final Quote quote;
+  final Announcement quote;
   QuoteCard({ required this.quote });
 
   @override
@@ -63,51 +63,3 @@ class QuoteCard extends StatelessWidget {
   }
 }
 
-class ListAnnouncements extends StatefulWidget {
-  const ListAnnouncements({Key? key}) : super(key: key);
-
-  @override
-  _ListAnnouncementsState createState() => _ListAnnouncementsState();
-}
-
-class _ListAnnouncementsState extends State<ListAnnouncements> {
-
-  final Stream<QuerySnapshot> studentsStream =
-        FirebaseFirestore.instance.collection('Announcements').snapshots();
-
-  @override
-  Widget build(BuildContext context) {
-    return StreamBuilder<QuerySnapshot>(
-        stream: studentsStream,
-        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-          if (snapshot.hasError) {
-            print('Something went Wrong');
-          }
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-
-          final List storedocs = [];
-          snapshot.data!.docs.map((DocumentSnapshot document) {
-            Map a = document.data() as Map<String, dynamic>;
-            storedocs.add(a);
-            a['id'] = document.id;
-          }).toList();
-          
-          for (var i = 0; i < storedocs.length; i++){
-            var temp = new Quote(Subject: storedocs[i]['subject'],text: storedocs[i]['announcement'] , author: storedocs[i]['author'], time: storedocs[i]['TimeStamp'].toDate());
-            storedocs[i] = QuoteCard(quote: temp);
-          }
-
-          return Container(
-            child: ListView.builder(
-              itemCount: storedocs.length,
-              itemBuilder: (BuildContext context, int index) {
-                return storedocs[index];
-              }),
-          );
-        });
-  }
-}
