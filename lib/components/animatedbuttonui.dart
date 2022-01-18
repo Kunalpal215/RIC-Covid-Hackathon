@@ -21,8 +21,8 @@ class AnimatedButtonUI extends StatelessWidget {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              Color(0xFFFF0000),
-              Color(0xFFFFAA00),
+              Color(0xFFE83E79),
+              Color(0xFFA82FA6),
             ],
           )),
       child: Center(

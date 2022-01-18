@@ -39,20 +39,19 @@ class _SlotBookingState extends State<SlotBooking> {
               }
 
               List<QueryDocumentSnapshot> docs = snapshot.data!.docs;
-              if (docs.isEmpty) {
-                return Center(
-                    child: Text("No Slots are available this time !"));
-              }
+
               return ListView.builder(
                 itemCount: docs.length + 1,
                 itemBuilder: (context, index) {
+
                   if (index != 0) {
+
                     return Container(
                       padding: EdgeInsets.all(10.0),
                       margin:
                           EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                       decoration: BoxDecoration(
-                        color: Color(0xFFFDE1AB),
+                        color: Colors.pink[100],
                         borderRadius: BorderRadius.all(Radius.circular(10)),
                         boxShadow: [
                           BoxShadow(
@@ -105,8 +104,8 @@ class _SlotBookingState extends State<SlotBooking> {
                                 cancelBtnText: 'No',
                                 onConfirmBtnTap: () => confirmbooking(
                                     docs[index - 1].id, docs[index-1]),
-                                confirmBtnColor: Colors.orange,
-                                backgroundColor: Color(0xFFFDE1AB),
+                                  confirmBtnColor: Colors.pink[600]!,
+                                  backgroundColor: Colors.pink[100]!
                               );
                             },
                             child: Text(
@@ -117,20 +116,34 @@ class _SlotBookingState extends State<SlotBooking> {
                       ),
                     );
                   } else {
-                    return GestureDetector(
-                      onTap: ()=>Navigator.pushNamed(context,MySlots.id),
-                        child: Container(
-                      color: Color(0xFFFFC367),
-                      width: screenWidth * 0.1,
-                      height: screenWidth * 0.15,
-                      margin: EdgeInsets.all(10.0),
-                      child: Center(
-                        child: Text(
-                          'VIEW ALL MY BOOKINGS',
-                          style: TextStyle(fontWeight: FontWeight.bold),
+
+                    return Container(
+                      width: MediaQuery.of(context).size.width,
+                      child: Column(
+
+                        children:[ Container( width: MediaQuery.of(context).size.width,
+                          child: GestureDetector(
+                            onTap: ()=>Navigator.pushNamed(context,MySlots.id),
+                              child: Container(
+                            color: Colors.pink[300],
+                            width: screenWidth * 0.1,
+                            height: screenWidth * 0.15,
+                            margin: EdgeInsets.all(10.0),
+                            child: Center(
+                              child: Text(
+                                'VIEW ALL MY BOOKINGS',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          )),
                         ),
+                  if (docs.isEmpty)
+                  Center(
+                  child: Text("No Slots are available this time !")),
+
+                        ]
                       ),
-                    ));
+                    );
                   }
                 },
               );
@@ -200,8 +213,9 @@ class _SlotBookingState extends State<SlotBooking> {
         title: 'Success',
         text: text,
         loopAnimation: false,
-        confirmBtnColor: Colors.orange,
-        backgroundColor: Color(0xFFFDE1AB));
+        confirmBtnColor: Colors.pink[600]!,
+        backgroundColor: Colors.pink[100]!
+    );
   }
 
   coolalertfailure(String text) {
@@ -211,7 +225,8 @@ class _SlotBookingState extends State<SlotBooking> {
         title: 'Oops...',
         text: text,
         loopAnimation: false,
-        confirmBtnColor: Colors.orange,
-        backgroundColor: Color(0xFFFDE1AB));
+        confirmBtnColor: Colors.pink[600]!,
+        backgroundColor: Colors.pink[100]!
+    );
   }
 }

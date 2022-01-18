@@ -22,7 +22,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     return Scaffold(
       body: SizedBox.expand(
         child: Container(
-          color: Colors.pink,
+          color: Colors.pink[100],
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
           child: Column(
@@ -37,12 +37,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 child: Padding(
                   padding:
                   EdgeInsets.symmetric(horizontal: 10),
-                  child: Text("Covid Management\nApp",
+                  child: Text("COVID MANAGEMENT \nAPP",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontSize: 40,
                           fontWeight: FontWeight.bold,
-                          color: Colors.white)),
+                          color: Color(0xFFFF018A))),
                 ),
               ),
               const Spacer(),

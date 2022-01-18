@@ -84,8 +84,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             Navigator.pushReplacementNamed(
                                 context, WelcomeScreen.id);
                           },
-                          confirmBtnColor: Colors.orange,
-                          backgroundColor: Color(0xFFFDE1AB),
+                            confirmBtnColor: Colors.pink[600]!,
+                            backgroundColor: Colors.pink[100]!
                         );
                       },
                       icon: Icon(Icons.logout))

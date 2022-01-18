@@ -170,8 +170,8 @@ border: OutlineInputBorder(
         title: 'Success',
         text: text,
         loopAnimation: false,
-        confirmBtnColor: Colors.orange,
-        backgroundColor: Color(0xFFFDE1AB)
+        confirmBtnColor: Colors.pink[600]!,
+        backgroundColor: Colors.pink[100]!
     );
   }
 
@@ -182,8 +182,8 @@ border: OutlineInputBorder(
         title: 'Oops...',
         text: text,
         loopAnimation: false,
-        confirmBtnColor: Colors.orange,
-        backgroundColor: Color(0xFFFDE1AB)
+        confirmBtnColor: Colors.pink[600]!,
+        backgroundColor: Colors.pink[100]!
     );
   }
 }

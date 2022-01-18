@@ -217,8 +217,8 @@ class _LoginScreenState extends State<LoginScreen> {
         title: 'Success',
         text: text,
         loopAnimation: false,
-        confirmBtnColor: Colors.orange,
-        backgroundColor: Color(0xFFFDE1AB));
+        confirmBtnColor: Colors.pink[600]!,
+        backgroundColor: Colors.pink[100]!);
   }
 
   coolalertfailure(String text) {
@@ -228,7 +228,7 @@ class _LoginScreenState extends State<LoginScreen> {
         title: 'Oops...',
         text: text,
         loopAnimation: false,
-        confirmBtnColor: Colors.orange,
-        backgroundColor: Color(0xFFFDE1AB));
+        confirmBtnColor: Colors.pink[600]!,
+        backgroundColor: Colors.pink[100]!);
   }
 }
