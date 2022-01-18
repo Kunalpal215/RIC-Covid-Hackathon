@@ -10,15 +10,14 @@ class ComplaintScreen extends StatefulWidget {
 }
 
 class _ComplaintScreenState extends State<ComplaintScreen> {
-  String subject="";
-  String text="";
+  TextEditingController subjectController = TextEditingController();
+  TextEditingController textController = TextEditingController();
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-    GlobalKey<FormState> formKey = GlobalKey<FormState>();
     return Scaffold(
-      body: Center(
-        child: Form(
+      body: Form(
           key: formKey,
           child: ListView(
             children: [
@@ -29,11 +28,13 @@ class _ComplaintScreenState extends State<ComplaintScreen> {
                   decoration: InputDecoration(
                     hintText: "Subject of complaint"
                   ),
-                  onChanged: (value){
-                    subject=value;
-                  },
+                  keyboardType: TextInputType.text,
+                  controller: subjectController,
+                  // onChanged: (value){
+                  //   subject=value;
+                  // },
                   validator: (value){
-                    if(value=="") return "This field can't be null";
+                    if(value==null || value.isEmpty) return "This field can't be null";
                     return null;
                   },
                 ),
@@ -43,20 +44,22 @@ class _ComplaintScreenState extends State<ComplaintScreen> {
                 width: screenWidth*0.7,
                 child: TextFormField(
                   decoration: InputDecoration(
-                      hintText: "Description of complaint"
+                      hintText: "Description of complaint",
                   ),
-                  onChanged: (value){
-                    text=value;
-                  },
+                  keyboardType: TextInputType.text,
+                  controller: textController,
+                  // onChanged: (value){
+                  //   text=value;
+                  // },
                   validator: (value){
-                    if(value=="") return "This field can't be null";
+                    if(value==null || value.isEmpty) return "This field can't be null";
                     return null;
                   },
                 ),
               ),
               GestureDetector(onTap: (){
                 if(formKey.currentState!.validate()){
-                  FirebaseFirestore.instance.collection('users').doc(FirebaseAuth.instance.currentUser!.phoneNumber).collection('complaints').add({"timestamp":DateTime.now().microsecondsSinceEpoch,"subject":subject,"text":text,"solved":false,"complaint_date":DateTime.now()});
+                  FirebaseFirestore.instance.collection('users').doc(FirebaseAuth.instance.currentUser!.phoneNumber).collection('complaints').add({"timestamp":DateTime.now().microsecondsSinceEpoch,"subject":subjectController.text,"text":textController.text,"solved":false,"complaint_date":DateTime.now()});
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Your complaint got registered")));
                   Navigator.pop(context);
                 }
@@ -72,7 +75,6 @@ class _ComplaintScreenState extends State<ComplaintScreen> {
             ],
           ),
         ),
-      ),
     );
   }
 }
