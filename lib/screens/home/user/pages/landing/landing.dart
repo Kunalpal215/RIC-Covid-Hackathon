@@ -2,6 +2,7 @@ import 'package:covid_app/screens/auth/profile_screen.dart';
 import 'package:covid_app/screens/home/user/pages/announcements/announcements.dart';
 import 'package:covid_app/screens/home/user/pages/covid_map/map.dart';
 import 'package:covid_app/services/logout_user.dart';
+import 'package:covid_app/screens/home/user/pages/landing/getCasesinfo.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../welcome_screen.dart';
@@ -32,51 +33,7 @@ class _HomePageLandingState extends State<HomePageLanding> {
               blurRadius: 5.0,
             ),]
             ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Container(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "56",
-                        style: TextStyle(
-                          fontSize: 38
-                        ),
-                      ),
-                      SizedBox(height: 15),
-                      Text(
-                        "Active Cases",
-                        style: TextStyle(
-                            fontSize: 22
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                Container(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "12",
-                        style: TextStyle(
-                            fontSize: 38
-                        ),
-                      ),
-                      SizedBox(height: 15),
-                      Text(
-                        "Negative cases",
-                        style: TextStyle(
-                            fontSize: 22
-                        ),
-                      )
-                    ],
-                  ),
-                )
-              ],
-            )
+            child: Totalcases()
           ),
       GestureDetector(
           onTap: ()=>Navigator.pushNamed(context,MapScreen.id),

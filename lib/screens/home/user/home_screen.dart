@@ -8,6 +8,8 @@ import 'package:covid_app/screens/home/user/pages/feedback/complaint_list.dart';
 import 'package:covid_app/screens/home/user/pages/landing/landing.dart';
 import 'package:covid_app/screens/welcome_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:covid_app/screens/home/user/pages/Covid_Cases/cases_info.dart';
+
 
 class HomeScreen extends StatefulWidget {
   static const id = '/home';
@@ -20,7 +22,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int curIdx = 0;
-  List Screens = [HomePageLanding(), SlotBooking(),ComplaintListScreen(), ProfileScreen(), Announcements(), WelcomeScreen()];
+  List Screens = [HomePageLanding(), SlotBooking(),ComplaintListScreen(), ProfileScreen(), Announcements(), WelcomeScreen(), Cases_info()];
 
   @override
   Widget build(BuildContext context) {
@@ -69,6 +71,20 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   // Courses -->
+
+                  InkWell(
+                    child: ListTile(
+                      leading: Icon(Icons.apartment),
+                      title: Text("Covid Status"),
+                      onTap: () {
+                        setState(() {
+                          curIdx = 6;
+                        });
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ),
+
                   InkWell(
                     child: ListTile(
                       leading: Icon(Icons.add_box_outlined),
