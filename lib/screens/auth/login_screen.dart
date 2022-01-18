@@ -29,8 +29,14 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: Text('Login with mobile number'),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(60),
+        child: AppBar(
+          title: Text('Login with mobile number'),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(bottomLeft: Radius.elliptical(30, 10),bottomRight: Radius.elliptical(30, 10))
+          ),
+        ),
       ),
       body: loading
           ? Center(child: CircularProgressIndicator())

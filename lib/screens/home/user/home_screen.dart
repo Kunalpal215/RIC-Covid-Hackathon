@@ -44,8 +44,14 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(Screentitle[curIdx]),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(60),
+        child: AppBar(
+          title: Text(Screentitle[curIdx]),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(bottomLeft: Radius.elliptical(30, 10),bottomRight: Radius.elliptical(30, 10))
+          ),
+        ),
       ),
       drawer: SafeArea(
         child: Drawer(

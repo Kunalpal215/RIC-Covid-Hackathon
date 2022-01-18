@@ -18,7 +18,15 @@ class _MySlotsState extends State<MySlots> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('My Booked Slots')),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(60),
+        child: AppBar(
+          title: Text('My booked slots'),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(bottomLeft: Radius.elliptical(30, 10),bottomRight: Radius.elliptical(30, 10))
+          ),
+        ),
+      ),
       body: loading
           ? Center(child: CircularProgressIndicator())
           : StreamBuilder<QuerySnapshot>(

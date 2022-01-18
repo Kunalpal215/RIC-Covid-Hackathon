@@ -52,6 +52,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Covid Management',
       home: (kCurrUser == null && kCurrAdmin == null)
           ? const WelcomeScreen()
@@ -59,7 +60,7 @@ class _MyAppState extends State<MyApp> {
               ? const HomeScreen()
               : const AdminHome(),
       theme: ThemeData(
-        primarySwatch: Colors.amber,
+        primarySwatch: Colors.pink,
       ),
       routes: {
         WelcomeScreen.id: (context) => const WelcomeScreen(),
