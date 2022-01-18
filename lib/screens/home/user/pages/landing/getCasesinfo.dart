@@ -37,49 +37,84 @@ class _TotalcasesState extends State<Totalcases> {
 
           var totalcasesno = (storedocs.removeAt(0))['Total Cases'];
 
-          return Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          return Column(
             children: [
-              Container(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "${storedocs.length}",
-                      style: TextStyle(
-                          fontSize: 38
-                      ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Container(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Active",
+                          style: TextStyle(
+                              fontSize: 21
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        Text(
+                          "${storedocs.length}",
+                          style: TextStyle(
+                              fontSize: 36
+                          ),
+                        ),
+                        Text(
+                          "+1",
+                          style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 16
+                          ),
+                        )
+                      ],
                     ),
-                    SizedBox(height: 15),
-                    Text(
-                      "Active Cases",
-                      style: TextStyle(
-                          fontSize: 22
-                      ),
-                    )
-                  ],
+                  ),
+                  Container(
+                    height: 140,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.black12,width: 0.7)
+                    ),
+                  ),
+                  Container(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Total",
+                          style: TextStyle(
+                              fontSize: 21
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        Text(
+                          "$totalcasesno",
+                          style: TextStyle(
+                              fontSize: 36
+                          ),
+                        ),
+                        Text(
+                          "+33",
+                          style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 16
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
+              SizedBox(height: 15),
+
+              Center(
+                child: Text(
+                    "The statistics of the cases have been collected from Covid Response Team.",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.black38
+                  ),
                 ),
               ),
-              Container(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "$totalcasesno",
-                      style: TextStyle(
-                          fontSize: 38
-                      ),
-                    ),
-                    SizedBox(height: 15),
-                    Text(
-                      "Total cases",
-                      style: TextStyle(
-                          fontSize: 22
-                      ),
-                    )
-                  ],
-                ),
-              )
             ],
           );
         });

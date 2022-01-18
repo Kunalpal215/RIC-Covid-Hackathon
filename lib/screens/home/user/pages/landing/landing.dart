@@ -23,12 +23,12 @@ class _HomePageLandingState extends State<HomePageLanding> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
-            height: 200,
+            height: 220,
             padding: EdgeInsets.all(10),
             margin: EdgeInsets.fromLTRB(15, 25, 15, 20),
             decoration: BoxDecoration(
               color: Colors.white,
-
+              borderRadius: BorderRadius.circular(10),
               boxShadow: const [BoxShadow(
               color: Colors.grey,
               blurRadius: 5.0,
@@ -39,15 +39,19 @@ class _HomePageLandingState extends State<HomePageLanding> {
       GestureDetector(
           onTap: ()=>Navigator.pushNamed(context,MapScreen.id),
           child: Container(
-            color: Color(0xFFF8BE4B),
             width: screenWidth,
             height: screenWidth * 0.15,
             margin: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
                 'VIEW COVID MAP',
-                style: TextStyle(fontWeight: FontWeight.bold),
+                style: TextStyle(fontWeight: FontWeight.bold,
+                    color: Colors.white),
               ),
+            ),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: Colors.pink,
             ),
           ))
         ],

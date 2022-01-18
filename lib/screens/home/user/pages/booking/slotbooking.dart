@@ -120,7 +120,7 @@ class _SlotBookingState extends State<SlotBooking> {
                     return GestureDetector(
                       onTap: ()=>Navigator.pushNamed(context,MySlots.id),
                         child: Container(
-                      color: Color(0xFFF8BE4B),
+                      color: Color(0xFFFFC367),
                       width: screenWidth * 0.1,
                       height: screenWidth * 0.15,
                       margin: EdgeInsets.all(10.0),

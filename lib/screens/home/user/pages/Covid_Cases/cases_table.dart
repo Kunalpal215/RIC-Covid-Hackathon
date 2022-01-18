@@ -51,24 +51,55 @@ class _Covid_TableState extends State<Covid_Table> {
                   child: Table(
                     // defaultColumnWidth: FixedColumnWidth(120.0),
                     border: TableBorder.all(
-                        color: Colors.black,
+                        color: Colors.grey,
                         style: BorderStyle.solid,
-                        width: 2),
+                        borderRadius: BorderRadius.circular(3),
+                        width: 0.6),
                     children: [
 
                       TableRow(
                           children: [
-                        Column(children:[Text('Name')]),
-                        Column(children:[Text('Hostel')]),
-                        Column(children:[Text('Room')]),
-                        Column(children:[Text('Roll')]),
+                        Container(
+                          padding: EdgeInsets.all(10),
+                            child: Column(children:[Text('Name')])
+                        ),
+                        Container(
+                            padding: EdgeInsets.all(10),
+                          child:Column(children:[Text('Hostel')])
+                        ),
+                        Container(
+                            padding: EdgeInsets.all(10),
+                          child:Column(children:[Text('Room')]),
+                        ),
+                        Container(
+                            padding: EdgeInsets.all(10),
+                          child:Column(children:[Text('Roll')]),
+                        ),
+
+
                       ]),
                       for (var i = 0; i < storedocs.length; i++) ...[
                         TableRow( children: [
-                          Column(children:[Text(storedocs[i]['Name'] , style: TextStyle(fontSize: 15.0)) ]),
-                          Column(children:[Text(storedocs[i]['Hostel'] , style: TextStyle(fontSize: 15.0)) ]),
-                          Column(children:[Text(storedocs[i]['Room'] , style: TextStyle(fontSize: 15.0)) ]),
-                          Column(children:[Text(storedocs[i]['Roll'] , style: TextStyle(fontSize: 15.0)) ]),
+                          Container(
+                            padding: EdgeInsets.all(7),
+                            child:Column(children:[Text(storedocs[i]['Name'] , style: TextStyle(fontSize: 15.0)) ]),
+                          ),
+                          Container(
+                              padding: EdgeInsets.all(7),
+                              child:Column(children:[Text(storedocs[i]['Hostel'] , style: TextStyle(fontSize: 15.0)) ]),
+                          ),
+                          Container(
+                              padding: EdgeInsets.all(7),
+                              child:Column(children:[Text(storedocs[i]['Room'] , style: TextStyle(fontSize: 15.0)) ]),
+                          ),
+                          Container(
+                              padding: EdgeInsets.all(7),
+                              child:Column(children:[Text(storedocs[i]['Roll'] , style: TextStyle(fontSize: 15.0)) ]),
+                          ),
+
+
+
+
                         ]),
                       ],
                     ],
