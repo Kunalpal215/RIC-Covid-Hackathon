@@ -1,8 +1,7 @@
 import 'package:covid_app/screens/home/admin/announcement.dart';
 import 'package:covid_app/screens/home/admin/complaints/complaint_list.dart';
-import 'package:covid_app/screens/home/admin/covidstatusupdate.dart';
-import 'package:covid_app/screens/home/admin/slotaddscreen.dart';
 import 'package:covid_app/screens/home/admin/slotmanagescreen.dart';
+import 'package:covid_app/screens/home/admin/covid_status/covidstatusupdate.dart';
 import 'package:covid_app/screens/welcome_screen.dart';
 import 'package:covid_app/services/logout_user.dart';
 import 'package:flutter/material.dart';

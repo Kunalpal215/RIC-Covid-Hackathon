@@ -115,7 +115,7 @@ class _MapScreenState extends State<MapScreen> {
                       markerId: MarkerId(element["mobile"]),
                       position: LatLng(element["position"].latitude,
                           element["position"].longitude),
-                      icon: (element["mobile"]==FirebaseAuth.instance.currentUser!.phoneNumber && double.parse(element["position"].latitude.toStringAsFixed(4))==double.parse(userPosition.latitude.toStringAsFixed(4)) && double.parse(element["position"].longitude.toStringAsFixed(4))==double.parse(userPosition.longitude.toStringAsFixed(4))) ? BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue) : (element["covid_status"]==true ? BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed) : BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen)),
+                      icon: (element["mobile"]==FirebaseAuth.instance.currentUser!.phoneNumber && double.parse(element["position"].latitude.toStringAsFixed(4))==double.parse(userPosition.latitude.toStringAsFixed(4)) && double.parse(element["position"].longitude.toStringAsFixed(4))==double.parse(userPosition.longitude.toStringAsFixed(4))) ? BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue) : (element["covid_status"]=="positive" ? BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed) : BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen)),
                   ),);
                 }
               });
