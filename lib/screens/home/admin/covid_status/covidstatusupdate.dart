@@ -111,6 +111,10 @@ class _Covid_TableState extends State<Covid_Table> {
                       padding: EdgeInsets.all(10),
                       child: Column(children: [Text('Roll')]),
                     ),
+                    Container(
+                      padding: EdgeInsets.all(10),
+                      child: Column(children: [Text('Delete')]),
+                    ),
                   ]),
                   for (var i = 0; i < storedocs.length; i++) ...[
                     TableRow(children: [
@@ -141,6 +145,13 @@ class _Covid_TableState extends State<Covid_Table> {
                           Text(storedocs[i]['Roll'],
                               style: TextStyle(fontSize: 15.0))
                         ]),
+                      ),
+                      GestureDetector(
+                        onTap: (){
+                          FirebaseFirestore.instance.collection('users').doc(snapshot.data!.docs[i].id).update({"covid_status":"negative"});
+                          FirebaseFirestore.instance.collection('cases').doc(snapshot.data!.docs[i].id).delete();
+                        },
+                        child: Icon(Icons.delete)
                       ),
                     ]),
                   ],
