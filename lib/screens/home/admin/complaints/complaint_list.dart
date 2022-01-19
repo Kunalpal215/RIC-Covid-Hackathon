@@ -131,10 +131,11 @@ class _ComplaintListAdminScreenState extends State<ComplaintListAdminScreen> {
           return FutureBuilder<List<Widget>>(
             future: getComplaints(docs, true),
             builder: (context, snapshot) {
-              if (!snapshot.hasData)
+              if (!snapshot.hasData) {
                 return Center(
                   child: CircularProgressIndicator(),
                 );
+              }
               return ListView(
                 children: snapshot.data!,
               );
