@@ -1,5 +1,6 @@
 import 'package:covid_app/models/admin.dart';
 import 'package:covid_app/screens/auth/adminlogin.dart';
+import 'package:covid_app/screens/home/admin/adminhome.dart';
 import 'package:covid_app/screens/home/user/home_screen.dart';
 import 'package:covid_app/screens/welcome_screen.dart';
 import 'package:covid_app/services/load_user.dart';
@@ -31,7 +32,7 @@ class _SplashScreenState extends State<SplashScreen> {
     //Check if admin exists
     else if (kEmail != null) {
       kCurrAdmin = Admin(email: kEmail);
-      Navigator.pushReplacementNamed(context, AdminLoginScreen.id);
+      Navigator.pushReplacementNamed(context, AdminHome.id);
     }
     else{
       Navigator.pushReplacementNamed(context, WelcomeScreen.id);
