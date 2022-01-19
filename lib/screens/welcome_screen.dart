@@ -22,51 +22,95 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     return Scaffold(
       body: SizedBox.expand(
         child: Container(
-          color: Colors.pink[100],
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Spacer(),
-              const Spacer(),
-              const Spacer(),
-              const Spacer(),
-              const Center(
+
+              Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(bottomRight: Radius.elliptical(80, 60)),
+                      color: Colors.pink,
+                  ),
+                height: 400,
+                width: MediaQuery.of(context).size.width,
                 child: Padding(
-                  padding:
-                  EdgeInsets.symmetric(horizontal: 10),
-                  child: Text("COVID MANAGEMENT \nAPP",
-                      textAlign: TextAlign.center,
+                  padding: const EdgeInsets.fromLTRB(30,130,0,0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Covid",
+                        textAlign: TextAlign.start,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 38
+                        )
+                      ),
+                      Text(
+                          "Management",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 38
+                          )
+                      ),
+                      Text(
+                          "App",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 38
+                          )
+                      ),
+                    ],
+                  ),
+                )
+              ),
+              const Spacer(),
+              const Spacer(),
+              GestureDetector(
+                child: FlatButton(
+
+                  onPressed: (){Navigator.pushNamed(context, LoginScreen.id);},
+                  child: Text("I am a User",
                       style: TextStyle(
-                          fontSize: 40,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFFFF018A))),
+                        color: Colors.white,
+                        fontSize:19,
+                      )
+                  ),
+                  color:Colors.grey[850],
+                  minWidth: 360,
+                  height: 50,
+                  shape: RoundedRectangleBorder(side: BorderSide(
+                      width: 1,
+                      style: BorderStyle.solid
+                  ),
+                      borderRadius: BorderRadius.circular(30)),
+                )
+              ),
+
+              Padding(
+                padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
+                child: GestureDetector(
+                    child: FlatButton(
+
+                      onPressed: (){Navigator.pushNamed(context, AdminLoginScreen.id);},
+                      child: Text("I am an Admin",
+                          style: TextStyle(
+                            fontSize:19,
+                          )
+                      ),
+                      color:Colors.grey[100],
+                      minWidth: 360,
+                      height: 50,
+                      shape: RoundedRectangleBorder(side: BorderSide(
+                          width: 1,
+                          style: BorderStyle.solid
+                      ),
+                          borderRadius: BorderRadius.circular(30)),
+                    )
                 ),
-              ),
-              const Spacer(),
-              Image.asset(
-                'assets/images/welcomescreenlogo.png',
-                width: 250,
-                height: 250,
-              ),
-              const Spacer(),
-              const Spacer(),
-              GestureDetector(
-                onTap: () {
-                  Navigator.pushNamed(context, LoginScreen.id);
-                },
-                child: const AnimatedButtonUI(
-                    text: "I AM A USER"),
-              ),
-              const Spacer(),
-              GestureDetector(
-                onTap: () {
-                  Navigator.pushNamed(context, AdminLoginScreen.id);
-                },
-                child: const AnimatedButtonUI(
-                    text: "I AM A ADMIN"),
               ),
               Spacer(),
               Spacer(),

@@ -28,7 +28,7 @@ class _HomePageLandingState extends State<HomePageLanding> {
               'ANNOUNCEMENTS',
               style: TextStyle(
                 fontWeight: FontWeight.w700,
-                fontSize: 25,
+                fontSize: 22,
               ),
             ),
           ),
@@ -39,7 +39,7 @@ class _HomePageLandingState extends State<HomePageLanding> {
               'COVID STATS',
               style: TextStyle(
                 fontWeight: FontWeight.w700,
-                fontSize: 25,
+                fontSize: 22,
               ),
             ),
           ),

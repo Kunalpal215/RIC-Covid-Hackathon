@@ -47,36 +47,46 @@ class _ComplaintListScreenState extends State<ComplaintListScreen> {
                 child: Container(
                   margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                   decoration: BoxDecoration(
-                    color: Colors.yellow,
+                    color: Colors.pink[100],
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
-                          margin: EdgeInsets.all(screenWidth * 0.017),
-                          child: Text(
-                            docs[index]["subject"].length > 40
-                                ? docs[index]["subject"].substring(0, 39) +
-                                    "..."
-                                : docs[index]["subject"],
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.w700),
-                          )),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
                         children: [
+                          Container(
+                              margin: EdgeInsets.all(screenWidth * 0.017),
+                              child: Text(
+                                docs[index]["subject"].length > 40
+                                    ? docs[index]["subject"].substring(0, 39) +
+                                        "..."
+                                    : docs[index]["subject"],
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.w700),
+                              )),
+                          Spacer(),
                           Padding(
-                            padding: EdgeInsets.only(right: screenWidth * 0.02),
-                            child: Text("Reply Status : " +
+                            padding: EdgeInsets.only(right: screenWidth * 0.017),
+                            child: Text("Status : " +
                                 (docs[index]["solved"] == true ? "Yes" : "No"),style: TextStyle(fontWeight: FontWeight.bold),),
                           ),
+                        ],
+                      ),
+
+                      Row(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.all(screenWidth*0.02),
+                            child: Text(docs[index]["text"]),
+                          ),
+                          Spacer(),
                           Padding(
                             padding: EdgeInsets.only(right: screenWidth * 0.02),
-                            child: Text(", Complaint date : " + docs[index]["complaint_date"]
-                                    .toDate()
-                                    .day
-                                    .toString() +
+                            child: Text(docs[index]["complaint_date"]
+                                .toDate()
+                                .day
+                                .toString() +
                                 "/" +
                                 docs[index]["complaint_date"]
                                     .toDate()
@@ -90,10 +100,7 @@ class _ComplaintListScreenState extends State<ComplaintListScreen> {
                           ),
                         ],
                       ),
-                      Container(
-                        margin: EdgeInsets.all(screenWidth*0.02),
-                        child: Text(docs[index]["text"]),
-                      ),
+
                     ],
                   ),
                 ),
