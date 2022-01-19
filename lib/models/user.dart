@@ -21,6 +21,15 @@ class User {
   // User's Name
   String? vaccinestatus;
 
+  // User's Name
+  String? hostel;
+
+  // User's Name
+  String? room;
+
+  // User's Name
+  String? roll;
+
   // Variable to check if user's document exists in Cloud Firestore
   bool exists = false;
 
@@ -28,7 +37,7 @@ class User {
       {required this.mobileNumber,
       this.name,
       this.covidstatus,
-      this.vaccinestatus});
+      this.vaccinestatus,this.hostel,this.room,this.roll});
 
   // Checks if user's document is present in Cloud Firestore and updates 'exists' property
   Future loadExistence() async {
@@ -48,7 +57,7 @@ class User {
 
   // Creates and updates documents in Firestore collection 'users' for this user
   Future createdocument(
-      String mobile, String? name, String? covid, String? vaccine) {
+      String mobile, String? name, String? covid, String? vaccine,String? hostel,String?room,String?roll) {
     CollectionReference users = FirebaseFirestore.instance.collection('users');
     print(mobile);
     return users.doc(mobile).set({
@@ -56,7 +65,10 @@ class User {
       'mobile': mobile,
       'covid_status': covid,
       'vaccine_status': vaccine,
-      'position': GeoPoint(0, 0)
+      'position': GeoPoint(0, 0),
+      'hostel':hostel,
+      'room':room,
+      'roll':roll
     }).then((value) {
       print('New document created / updated for user');
     }).catchError((e) {
@@ -65,13 +77,16 @@ class User {
   }
 
   Future updatedocument(
-      String mobile, String? name, String? covid, String? vaccine) {
+      String mobile, String? name, String? covid, String? vaccine,String? hostel,String?room,String?roll) {
     CollectionReference users = FirebaseFirestore.instance.collection('users');
     return users.doc(mobile).update({
       'name': name,
       'mobile': mobile,
       'covid_status': covid,
-      'vaccine_status': vaccine
+      'vaccine_status': vaccine,
+      'hostel':hostel,
+      'room':room,
+      'roll':roll
     }).then((value) {
       // print('New document created / updated for user');
     }).catchError((e) {
@@ -89,6 +104,9 @@ class User {
       kCurrUser!.name = event.docs.first['name'];
       kCurrUser!.covidstatus = event.docs.first['covid_status'];
       kCurrUser!.vaccinestatus = event.docs.first['vaccine_status'];
+      kCurrUser!.hostel = event.docs.first['hostel'];
+      kCurrUser!.room = event.docs.first['room'];
+      kCurrUser!.roll = event.docs.first['roll'];
     });
   }
 

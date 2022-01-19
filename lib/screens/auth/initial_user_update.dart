@@ -20,6 +20,9 @@ class _InitialUserUpdateState extends State<InitialUserUpdate> {
   String dropdownvaluevaccinestatus = 'zero';
   String dropdownvaluecovidstatus = 'negative';
   TextEditingController namecontroller = new TextEditingController();
+  TextEditingController hostel = TextEditingController();
+  TextEditingController room = TextEditingController();
+  TextEditingController roll = TextEditingController();
   bool loading = false;
 
   @override
@@ -37,131 +40,195 @@ class _InitialUserUpdateState extends State<InitialUserUpdate> {
             : Stack(
                 overflow: Overflow.visible,
                 children: <Widget>[
-                  Form(
-                    key: _formKey2,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        Padding(
-                          padding: EdgeInsets.all(4.0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: <Widget>[
-                              Flexible(
-                                child: TextFormField(
-                                  controller: namecontroller,
-                                  onChanged: (text) => kCurrUser!.name = text,
-                                  decoration: const InputDecoration(
-                                      hintText: "Enter your Name"),
-                                  enabled: true,
-                                  validator: (value) {
-                                    if (value!.isEmpty) {
-                                      return 'Enter name';
-                                    }
-                                  },
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
+                  SingleChildScrollView(
+                    child: Form(
+                      key: _formKey2,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          Padding(
                             padding: EdgeInsets.all(4.0),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
-                                Text(
-                                  'Covid Status',
-                                  style: TextStyle(
-                                      fontSize: 16.0,
-                                      fontWeight: FontWeight.bold),
+                                Flexible(
+                                  child: TextFormField(
+                                    controller: namecontroller,
+                                    decoration: const InputDecoration(
+                                        hintText: "Enter your Name"),
+                                    enabled: true,
+                                    validator: (value) {
+                                      if (value!.isEmpty) {
+                                        return 'Enter name';
+                                      }
+                                    },
+                                  ),
                                 ),
-                                Container(
-                                  child: Text(
-                                    'Vaccine Status',
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(4.0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: <Widget>[
+                                Flexible(
+                                  child: TextFormField(
+                                    controller: hostel,
+                                    decoration: const InputDecoration(
+                                        hintText: "Enter hostel"),
+                                    enabled: true,
+                                    validator: (value) {
+                                      if (value!.isEmpty) {
+                                        return 'Enter hostel';
+                                      }
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(4.0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: <Widget>[
+                                Flexible(
+                                  child: TextFormField(
+                                    controller: room,
+                                    decoration: const InputDecoration(
+                                        hintText: "Enter your room no."),
+                                    enabled: true,
+                                    validator: (value) {
+                                      if (value!.isEmpty) {
+                                        return 'Enter room no.';
+                                      }
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(4.0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: <Widget>[
+                                Flexible(
+                                  child: TextFormField(
+                                    controller: roll,
+                                    decoration: const InputDecoration(
+                                        hintText: "Enter roll no."),
+                                    enabled: true,
+                                    validator: (value) {
+                                      if (value!.isEmpty) {
+                                        return 'Enter roll no.';
+                                      }
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                              padding: EdgeInsets.all(4.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Text(
+                                    'Covid Status',
                                     style: TextStyle(
                                         fontSize: 16.0,
                                         fontWeight: FontWeight.bold),
                                   ),
-                                ),
-                              ],
-                            )),
-                        Padding(
-                            padding: EdgeInsets.all(4.0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Flexible(
-                                  child: DropdownButton<String>(
-                                    // Initial Value
-                                    value: dropdownvaluecovidstatus,
-
-                                    // Down Arrow Icon
-                                    icon: const Icon(Icons.keyboard_arrow_down),
-
-                                    // Array list of items
-                                    items: covis_status.map((String items) {
-                                      return DropdownMenuItem(
-                                        value: items,
-                                        child: Text(items),
-                                      );
-                                    }).toList(),
-                                    // After selecting the desired option,it will
-                                    // change button value to selected value
-                                    onChanged: (String? newValue) {
-                                      setState(() {
-                                        dropdownvaluecovidstatus = newValue!;
-                                      });
-                                      kCurrUser!.covidstatus =
-                                          dropdownvaluecovidstatus;
-                                    },
+                                  Container(
+                                    child: Text(
+                                      'Vaccine Status',
+                                      style: TextStyle(
+                                          fontSize: 16.0,
+                                          fontWeight: FontWeight.bold),
+                                    ),
                                   ),
-                                  flex: 2,
-                                ),
-                                Flexible(
-                                  child: DropdownButton<String>(
-                                    // Initial Value
-                                    value: dropdownvaluevaccinestatus,
+                                ],
+                              )),
+                          Padding(
+                              padding: EdgeInsets.all(4.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Flexible(
+                                    child: DropdownButton<String>(
+                                      // Initial Value
+                                      value: dropdownvaluecovidstatus,
 
-                                    // Down Arrow Icon
-                                    icon: const Icon(Icons.keyboard_arrow_down),
+                                      // Down Arrow Icon
+                                      icon: const Icon(Icons.keyboard_arrow_down),
 
-                                    // Array list of items
-                                    items: vaccine_status.map((String items) {
-                                      return DropdownMenuItem(
-                                        value: items,
-                                        child: Text(items),
-                                      );
-                                    }).toList(),
-                                    // After selecting the desired option,it will
-                                    // change button value to selected value
-                                    onChanged: (String? newValue) {
-                                      setState(() {
-                                        dropdownvaluevaccinestatus = newValue!;
-                                      });
-                                      kCurrUser!.vaccinestatus =
-                                          dropdownvaluevaccinestatus;
-                                    },
+                                      // Array list of items
+                                      items: covis_status.map((String items) {
+                                        return DropdownMenuItem(
+                                          value: items,
+                                          child: Text(items),
+                                        );
+                                      }).toList(),
+                                      // After selecting the desired option,it will
+                                      // change button value to selected value
+                                      onChanged: (String? newValue) {
+                                        setState(() {
+                                          dropdownvaluecovidstatus = newValue!;
+                                        });
+                                        kCurrUser!.covidstatus =
+                                            dropdownvaluecovidstatus;
+                                      },
+                                    ),
+                                    flex: 2,
                                   ),
-                                ),
-                              ],
-                            )),
-                        Padding(
-                          padding: const EdgeInsets.all(4.0),
-                          child: ElevatedButton(
-                            child: Text("Update Profile"),
-                            onPressed: () async {
-                              if (_formKey2.currentState!.validate()) {
-                                await routescreen(
-                                  widget.mobileNumber,
-                                  namecontroller.text,
-                                );
-                              }
-                            },
-                          ),
-                        )
-                      ],
+                                  Flexible(
+                                    child: DropdownButton<String>(
+                                      // Initial Value
+                                      value: dropdownvaluevaccinestatus,
+
+                                      // Down Arrow Icon
+                                      icon: const Icon(Icons.keyboard_arrow_down),
+
+                                      // Array list of items
+                                      items: vaccine_status.map((String items) {
+                                        return DropdownMenuItem(
+                                          value: items,
+                                          child: Text(items),
+                                        );
+                                      }).toList(),
+                                      // After selecting the desired option,it will
+                                      // change button value to selected value
+                                      onChanged: (String? newValue) {
+                                        setState(() {
+                                          dropdownvaluevaccinestatus = newValue!;
+                                        });
+                                        kCurrUser!.vaccinestatus =
+                                            dropdownvaluevaccinestatus;
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              )),
+                          Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: ElevatedButton(
+                              child: Text("Update Profile"),
+                              onPressed: () async {
+                                if (_formKey2.currentState!.validate()) {
+                                  await routescreen(
+                                    widget.mobileNumber,
+                                    namecontroller.text,hostel.text,room.text,roll.text
+                                  );
+                                }
+                              },
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ],
@@ -170,12 +237,12 @@ class _InitialUserUpdateState extends State<InitialUserUpdate> {
     );
   }
 
-  Future<void> routescreen(String mobileNumber, String name) async {
+  Future<void> routescreen(String mobileNumber, String name,String hostel,String room,String roll) async {
     setState(() {
       loading = true;
     });
     await loadUser(mobileNumber, name, dropdownvaluecovidstatus,
-        dropdownvaluevaccinestatus);
+        dropdownvaluevaccinestatus,hostel,room,roll);
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('mobile', mobileNumber);
     print(mobileNumber);

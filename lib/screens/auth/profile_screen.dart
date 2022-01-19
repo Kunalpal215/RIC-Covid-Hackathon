@@ -22,6 +22,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final FocusNode myFocusNode = FocusNode();
   late Map<String, dynamic> userdata;
   TextEditingController namecontroller = TextEditingController();
+  TextEditingController hostel = TextEditingController();
+  TextEditingController room = TextEditingController();
+  TextEditingController roll = TextEditingController();
   TextEditingController phonecontroller = TextEditingController();
   TextEditingController vaccineController = TextEditingController();
   TextEditingController covidStatusController = TextEditingController();
@@ -32,6 +35,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void initState() {
     namecontroller.text = kCurrUser!.name!;
     phonecontroller.text = kCurrUser!.mobileNumber;
+    hostel.text = kCurrUser!.hostel!;
+    roll.text = kCurrUser!.roll!;
+    room.text = kCurrUser!.room!;
     dropdownvaluevaccinestatus = kCurrUser!.vaccinestatus!;
     dropdownvaluecovidstatus = kCurrUser!.covidstatus!;
   }
@@ -147,6 +153,145 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       controller: namecontroller,
                                       decoration: const InputDecoration(
                                         hintText: "Enter Your Name",
+                                      ),
+                                      validator: (value) {
+                                        if (value!.isEmpty) {
+                                          return 'Field cant be null';
+                                        }
+                                      },
+                                      enabled: !_status,
+                                      autofocus: !_status,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                                padding: EdgeInsets.only(
+                                    left: 10.0, right: 10.0, top: 10.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: <Widget>[
+                                    Column(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.start,
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: const <Widget>[
+                                        Text(
+                                          'Hostel',
+                                          style: TextStyle(
+                                              fontSize: 16.0,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                )),
+                            Padding(
+                              padding: EdgeInsets.only(
+                                  left: 10.0, right: 10.0, top: 2.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: <Widget>[
+                                  Flexible(
+                                    child: TextFormField(
+                                      validator: (value) {
+                                        if (value!.isEmpty) {
+                                          return 'Field cant be null';
+                                        }
+                                      },
+                                      controller: hostel,
+                                      decoration: const InputDecoration(
+                                        hintText: "Enter Your Hostel",
+                                      ),
+                                      enabled: !_status,
+                                      autofocus: !_status,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                                padding: EdgeInsets.only(
+                                    left: 10.0, right: 10.0, top: 10.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: <Widget>[
+                                    Column(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.start,
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: const <Widget>[
+                                        Text(
+                                          'Room number',
+                                          style: TextStyle(
+                                              fontSize: 16.0,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                )),
+                            Padding(
+                              padding: EdgeInsets.only(
+                                  left: 10.0, right: 10.0, top: 2.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: <Widget>[
+                                  Flexible(
+                                    child: TextFormField(
+                                      validator: (value) {
+                                        if (value!.isEmpty) {
+                                          return 'Field cant be null';
+                                        }
+                                      },
+                                      controller: room,
+                                      decoration: const InputDecoration(
+                                        hintText: "Enter Your Room nuumber",
+                                      ),
+                                      enabled: !_status,
+                                      autofocus: !_status,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ), Padding(
+                                padding: EdgeInsets.only(
+                                    left: 10.0, right: 10.0, top: 10.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: <Widget>[
+                                    Column(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.start,
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: const <Widget>[
+                                        Text(
+                                          'Roll',
+                                          style: TextStyle(
+                                              fontSize: 16.0,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                )),
+                            Padding(
+                              padding: EdgeInsets.only(
+                                  left: 10.0, right: 10.0, top: 2.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: <Widget>[
+                                  Flexible(
+                                    child: TextFormField(
+                                      validator: (value) {
+                                        if (value!.isEmpty) {
+                                          return 'Field cant be null';
+                                        }
+                                      },
+                                      controller: roll,
+                                      decoration: const InputDecoration(
+                                        hintText: "Enter Your Roll no.",
                                       ),
                                       enabled: !_status,
                                       autofocus: !_status,
@@ -330,13 +475,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       loading = true;
                     });
                     kCurrUser!.name = namecontroller.text;
+
                     kCurrUser!.covidstatus = dropdownvaluecovidstatus;
                     kCurrUser!.vaccinestatus = dropdownvaluevaccinestatus;
                     await kCurrUser!.updatedocument(
                         kCurrUser!.mobileNumber,
                         namecontroller.text,
+
                         dropdownvaluecovidstatus,
-                        dropdownvaluevaccinestatus);
+                        dropdownvaluevaccinestatus, hostel.text,
+                      room.text,
+                      roll.text,);
                     print('1');
                     await kCurrUser!.retrieveDocument();
                     print('2');
@@ -344,7 +493,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     await kCurrUser!.uploadProfileImage();
                     await kCurrUser!.downloadProfileImage();
                     print('5');
-                    await loadUser(kCurrUser!.mobileNumber, null, null, null);
+                    await loadUser(kCurrUser!.mobileNumber, null, null, null,null,null,null);
                     print('6');
                     setState(() {
                       loading = false;

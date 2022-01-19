@@ -28,7 +28,7 @@ class _SlotBookingState extends State<SlotBooking> {
         : StreamBuilder<QuerySnapshot>(
             stream: FirebaseFirestore.instance
                 .collection('appointments')
-                .where('slot_from', isGreaterThanOrEqualTo: _start)
+                .where('slot_from', isGreaterThanOrEqualTo: _start).orderBy('slot_from',descending: true)
                 .snapshots(),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
@@ -131,7 +131,7 @@ class _SlotBookingState extends State<SlotBooking> {
                             child: Center(
                               child: Text(
                                 'VIEW ALL MY BOOKINGS',
-                                style: TextStyle(fontWeight: FontWeight.bold),
+                                style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),
                               ),
                             ),
                           )),
@@ -186,6 +186,9 @@ class _SlotBookingState extends State<SlotBooking> {
       appointments.collection('bookings').doc(kCurrUser!.mobileNumber).set({
         'name': kCurrUser!.name,
         'mobile': kCurrUser!.mobileNumber,
+        'hostel':kCurrUser!.hostel!,
+        'room':kCurrUser!.room!,
+        'roll':kCurrUser!.roll!,
       }).then((value) {
         coolalertsuccess('Booked slot successfully');
         setState(() {

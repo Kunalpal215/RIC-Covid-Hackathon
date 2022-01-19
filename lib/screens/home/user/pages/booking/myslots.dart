@@ -55,7 +55,7 @@ class _MySlotsState extends State<MySlots> {
                       margin:
                           EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                       decoration: BoxDecoration(
-                        color: Color(0xFFFDE1AB),
+                        color: Colors.pink[100],
                         borderRadius: BorderRadius.all(Radius.circular(10)),
                         boxShadow: [
                           BoxShadow(
@@ -176,8 +176,8 @@ class _MySlotsState extends State<MySlots> {
         title: 'Success',
         text: text,
         loopAnimation: false,
-        confirmBtnColor: Colors.orange,
-        backgroundColor: Color(0xFFFDE1AB));
+        confirmBtnColor: Colors.pink[600]!,
+        backgroundColor: Colors.pink[100]!);
   }
 
   coolalertfailure(String text) {
@@ -187,7 +187,7 @@ class _MySlotsState extends State<MySlots> {
         title: 'Oops...',
         text: text,
         loopAnimation: false,
-        confirmBtnColor: Colors.orange,
-        backgroundColor: Color(0xFFFDE1AB));
+        confirmBtnColor: Colors.pink[600]!,
+        backgroundColor: Colors.pink[100]!);
   }
 }

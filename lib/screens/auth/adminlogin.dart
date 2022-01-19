@@ -69,8 +69,7 @@ class _FormsState extends State<Forms> {
 
                 decoration: InputDecoration(
 border: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.black, width: 2.0),
-              borderRadius: BorderRadius.circular(2.0),
+
         ),
                     hintText: "Enter your email",
                     labelText: "Email",
@@ -88,8 +87,7 @@ border: OutlineInputBorder(
               TextFormField(
                 decoration: InputDecoration(
                     border: OutlineInputBorder(
-                      borderSide: const BorderSide(color: Colors.black, width: 2.0),
-                      borderRadius: BorderRadius.circular(2.0),
+
                     ),
                     hintText: "Enter your password",
                     labelText: "Password",

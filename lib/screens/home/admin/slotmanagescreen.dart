@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cool_alert/cool_alert.dart';
 import 'package:covid_app/screens/home/admin/slotaddscreen.dart';
+import 'package:covid_app/screens/home/admin/slotusers.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -27,8 +28,7 @@ class _SlotManageScreenState extends State<SlotManageScreen> {
           ? Center(child: CircularProgressIndicator())
           : StreamBuilder<QuerySnapshot>(
               stream: FirebaseFirestore.instance
-                  .collection('appointments')
-                  .where('slot_from', isGreaterThanOrEqualTo: _start)
+                  .collection('appointments').orderBy('slot_from',descending: true)
                   .snapshots(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
@@ -90,24 +90,38 @@ class _SlotManageScreenState extends State<SlotManageScreen> {
                               style: TextStyle(
                                   fontSize: 15, fontWeight: FontWeight.w400),
                             ),
-                            ElevatedButton(
-                              onPressed: () {
-                                CoolAlert.show(
-                                    context: context,
-                                    barrierDismissible: false,
-                                    type: CoolAlertType.confirm,
-                                    text: 'Do you want to delete this slot',
-                                    confirmBtnText: 'Yes',
-                                    cancelBtnText: 'No',
-                                    onConfirmBtnTap: () =>
-                                        deleteslot(docs[index - 1].id),
-                                    confirmBtnColor: Colors.pink[600]!,
-                                    backgroundColor: Colors.pink[100]!);
-                              },
-                              child: Text(
-                                'Delete this slot',
-                              ),
-                            ),
+                            Row(
+                              children: [
+                                ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => SlotUsers()));
+                                  },
+                                  child: Text(
+                                    'View booked users',
+                                  ),
+                                ),
+                                SizedBox(width:10.0 ,),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    CoolAlert.show(
+                                        context: context,
+                                        barrierDismissible: false,
+                                        type: CoolAlertType.confirm,
+                                        text: 'Do you want to delete this slot',
+                                        confirmBtnText: 'Yes',
+                                        cancelBtnText: 'No',
+                                        onConfirmBtnTap: () =>
+                                            deleteslot(docs[index - 1].id),
+                                        confirmBtnColor: Colors.pink[600]!,
+                                        backgroundColor: Colors.pink[100]!);
+                                  },
+                                  child: Text(
+                                    'Delete this slot',
+                                  ),
+                                ),
+                              ],
+                            )
+
                           ],
                         ),
                       );
