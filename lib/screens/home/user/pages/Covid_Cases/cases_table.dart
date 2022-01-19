@@ -35,7 +35,7 @@ class _Covid_TableState extends State<Covid_Table> {
             storedocs.add(a);
             a['id'] = document.id;
           }).toList();
-
+          var totalcasesno = storedocs.length;
           int new_cases = 0 ;
           DateTime now = new DateTime.now();
           DateTime date = new DateTime(now.year, now.month, now.day);
