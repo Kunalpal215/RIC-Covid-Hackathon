@@ -36,7 +36,7 @@ class _Covid_TableState extends State<Covid_Table> {
             a['id'] = document.id;
           }).toList();
 
-          var totalcasesno = (storedocs.removeAt(0))['Total Cases'];
+          var totalcasesno = storedocs.length;
 
           return Center(
               child: Column(children: <Widget>[

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:covid_app/screens/home/admin/covid_status/covid_status_form.dart';
 import 'package:flutter/material.dart';
 
 class CovidStatusAdmin extends StatefulWidget {
@@ -12,31 +13,32 @@ class _CovidStatusAdminState extends State<CovidStatusAdmin> {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-    return Scaffold(
+    return SafeArea(
+        child: Scaffold(
       body: Column(
         children: [
           Container(
             width: MediaQuery.of(context).size.width,
             child: GestureDetector(
-                onTap: () => Navigator.pushNamed(context, 'kk'),
-                child: Container(
-                  color: Colors.pink[300],
-                  width: screenWidth * 0.1,
-                  height: screenWidth * 0.15,
-                  margin: EdgeInsets.all(10.0),
-                  child: Center(
-                    child: Text(
-                      'ADD CASES',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
+              onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => CovidUpdateForm())),
+              child: Container(
+                color: Colors.pink[300],
+                width: screenWidth * 0.1,
+                height: screenWidth * 0.15,
+                margin: EdgeInsets.all(10.0),
+                child: Center(
+                  child: Text(
+                    'ADD CASES',
+                    style: TextStyle(fontWeight: FontWeight.bold),
                   ),
+                ),
 
-                ),),
+              ),),
           ),
           Covid_Table()
         ],
       ),
-    );
+    ),);
   }
 }
 
@@ -73,7 +75,7 @@ class _Covid_TableState extends State<Covid_Table> {
             a['id'] = document.id;
           }).toList();
 
-          var totalcasesno = (storedocs.removeAt(0))['Total Cases'];
+          var totalcasesno = storedocs.length;
 
           return Center(
               child: Column(children: <Widget>[
