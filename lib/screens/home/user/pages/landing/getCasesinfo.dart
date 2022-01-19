@@ -35,7 +35,16 @@ class _TotalcasesState extends State<Totalcases> {
             a['id'] = document.id;
           }).toList();
 
-          var totalcasesno = (storedocs.removeAt(0))['Total Cases'];
+          int new_cases = 0 ;
+          DateTime now = new DateTime.now();
+          DateTime date = new DateTime(now.year, now.month, now.day);
+
+          for(int i=1; i<storedocs.length; i++){
+            DateTime myDateTime = storedocs[i]['Date'].toDate();
+            if(myDateTime.compareTo(date) > -1){
+              new_cases++;
+            }
+          }
 
           return Column(
             children: [
@@ -59,13 +68,13 @@ class _TotalcasesState extends State<Totalcases> {
                               fontSize: 36
                           ),
                         ),
-                        Text(
-                          "+1",
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 16
-                          ),
-                        )
+                        // Text(
+                        //   "+1",
+                        //   style: TextStyle(
+                        //     color: Colors.grey,
+                        //     fontSize: 16
+                        //   ),
+                        // )
                       ],
                     ),
                   ),
@@ -80,25 +89,25 @@ class _TotalcasesState extends State<Totalcases> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Total",
+                          "New",
                           style: TextStyle(
                               fontSize: 21
                           ),
                         ),
                         SizedBox(height: 10),
                         Text(
-                          "$totalcasesno",
+                          "$new_cases",
                           style: TextStyle(
                               fontSize: 36
                           ),
                         ),
-                        Text(
-                          "+33",
-                          style: TextStyle(
-                              color: Colors.grey,
-                              fontSize: 16
-                          ),
-                        )
+                        // Text(
+                        //   "+33",
+                        //   style: TextStyle(
+                        //       color: Colors.grey,
+                        //       fontSize: 16
+                        //   ),
+                        // )
                       ],
                     ),
                   )
