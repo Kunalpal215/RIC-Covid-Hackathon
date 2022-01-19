@@ -73,7 +73,7 @@ class _AnnouncementListState extends State<AnnouncementList> {
                             confirmBtnText: 'Yes',
                             cancelBtnText: 'No',
                             confirmBtnColor: Colors.pink[600]!,
-                            backgroundColor: Colors.pink[100]!);
+                            backgroundColor: Colors.pink[100]!,
                         onConfirmBtnTap:
                             () {
                           FirebaseFirestore.instance
