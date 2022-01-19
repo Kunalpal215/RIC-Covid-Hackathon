@@ -29,7 +29,6 @@ Future<void> main() async {
   if (kMobileNumber != null) {
     kCurrUser = User(mobileNumber: kMobileNumber);
     await kCurrUser!.retrieveDocument();
-    await kCurrUser!.downloadProfileImage();
   }
   //Check if admin exists
   if (kEmail != null) {
@@ -60,6 +59,7 @@ class _MyAppState extends State<MyApp> {
               : const AdminHome(),
       theme: ThemeData(
         primarySwatch: Colors.pink,
+        primaryColor: Colors.pink,
       ),
       routes: {
         WelcomeScreen.id: (context) => const WelcomeScreen(),

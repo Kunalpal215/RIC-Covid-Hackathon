@@ -4,7 +4,6 @@ import 'dart:io';
 
 import 'package:covid_app/constants.dart';
 import 'package:covid_app/services/load_user.dart';
-import 'package:covid_app/services/pick_image.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -29,7 +28,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   TextEditingController vaccineController = TextEditingController();
   TextEditingController covidStatusController = TextEditingController();
   final keys = GlobalKey<FormState>();
-  File image = File(kProfileImagePath!);
 
   @override
   void initState() {
@@ -66,52 +64,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
-                            if (_status)
                               Padding(
                                 padding: EdgeInsets.only(left: 10.0, top: 10.0),
                                 child: CircleAvatar(
                                   radius: 50.0,
-                                  backgroundColor: const Color(0xFF778899),
-                                  backgroundImage: FileImage(
-                                    File(image.path),
+                                  backgroundColor: const Color(0xFFFFFFFF),
+                                  backgroundImage: AssetImage(
+                                    'assets/images/profile.png'
                                   ),
                                 ),
                               ),
-                            if (!_status)
-                              Padding(
-                                padding: EdgeInsets.only(left: 10.0, top: 10.0),
-                                child: CircleAvatar(
-                                  radius: 50.0,
-                                  backgroundImage: FileImage(
-                                    image,
-                                  ),
-                                  child: Container(
-                                    width: 100,
-                                    height: 100,
-                                    decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(50.0),
-                                        color: const Color(0xFF532601)
-                                            .withOpacity(0.7)),
-                                    child: Center(
-                                      child: IconButton(
-                                        icon: Icon(Icons.camera_alt_outlined),
-                                        iconSize: 48.0,
-                                        color: Colors.white,
-                                        onPressed: () async {
-                                          final PickedFile newImage =
-                                              await pickImageFromGallery();
-                                          setState(() {
-                                            if (newImage != null) {
-                                              image = File(newImage.path);
-                                            }
-                                          });
-                                        },
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
+
                             Padding(
                                 padding: EdgeInsets.only(
                                     left: 10.0, right: 10.0, top: 5.0),
@@ -486,15 +449,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         dropdownvaluevaccinestatus, hostel.text,
                       room.text,
                       roll.text,);
-                    print('1');
                     await kCurrUser!.retrieveDocument();
-                    print('2');
-                    await image.copy(kProfileImagePath!);
-                    await kCurrUser!.uploadProfileImage();
-                    await kCurrUser!.downloadProfileImage();
-                    print('5');
                     await loadUser(kCurrUser!.mobileNumber, null, null, null,null,null,null);
-                    print('6');
                     setState(() {
                       loading = false;
                     });

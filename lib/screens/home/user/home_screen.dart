@@ -61,9 +61,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 accountEmail: Text(kCurrUser!.mobileNumber),
                 currentAccountPicture: CircleAvatar(
                   radius: 50.0,
-                  backgroundColor: const Color(0xFF778899),
-                  backgroundImage: FileImage(
-                    File(kProfileImagePath!),
+                  backgroundColor: Theme.of(context).primaryColor,
+                  backgroundImage: AssetImage(
+                      'assets/images/profile.png'
                   ),
                 ),
                 otherAccountsPictures: [
@@ -79,6 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           cancelBtnText: 'No',
                           onConfirmBtnTap: () async {
                             await logoutUser();
+                            Navigator.pop(context);
                             Navigator.pushReplacementNamed(
                                 context, WelcomeScreen.id);
                           },

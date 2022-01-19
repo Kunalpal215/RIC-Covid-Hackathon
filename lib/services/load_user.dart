@@ -16,13 +16,8 @@ Future<bool> loadUser(String mobileNumber,String? name, String? covidstatus,Stri
   await kCurrUser!.loadExistence();
   if (kCurrUser!.exists) {
     await kCurrUser!.retrieveDocument();
-    await kCurrUser!.downloadProfileImage();
-    await kCurrUser!.uploadProfileImage();
   } else {
     await kCurrUser!.createdocument(mobileNumber,name, covidstatus,vaccinestatus,hostel,room,roll);
-    await copyImageFile(
-        'profile.png', '${kCurrUser!.mobileNumber}/profile.png');
-    await kCurrUser!.downloadProfileImage();
   }
   print(kCurrUser!.exists);
   return kCurrUser!.exists;

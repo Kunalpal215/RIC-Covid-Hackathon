@@ -111,30 +111,5 @@ class User {
   }
 
   // Downloads current user's profile image from Firebase Storage
-  Future downloadProfileImage() async {
-    Directory appDocDirectory = await getApplicationDocumentsDirectory();
-    kProfileImagePath = '${appDocDirectory.path}/profile.png';
-    File profileImage = File(kProfileImagePath!);
-    try {
-      await FirebaseStorage.instance
-          .ref('$mobileNumber/profile.png')
-          .writeToFile(profileImage);
-    } on FirebaseException catch (e) {
-      print(e);
-    }
-  }
 
-  // Uploads current profile image to Firebase Storage
-  Future uploadProfileImage() async {
-    Directory appDocDirectory = await getApplicationDocumentsDirectory();
-    kProfileImagePath = '${appDocDirectory.path}/profile.png';
-    File profileImage = File(kProfileImagePath!);
-    try {
-      await FirebaseStorage.instance
-          .ref('$mobileNumber/profile.png')
-          .putFile(profileImage);
-    } on FirebaseException catch (e) {
-      print(e);
-    }
-  }
 }

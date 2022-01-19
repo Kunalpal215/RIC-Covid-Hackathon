@@ -9,6 +9,4 @@ dynamic kMobileNumber;
 dynamic kEmail;
 User? kCurrUser;
 Admin? kCurrAdmin;
-// Path of profile image to be displayed
-String? kProfileImagePath;
 

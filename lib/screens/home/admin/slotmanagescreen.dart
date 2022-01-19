@@ -94,7 +94,7 @@ class _SlotManageScreenState extends State<SlotManageScreen> {
                               children: [
                                 ElevatedButton(
                                   onPressed: () {
-                                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => SlotUsers()));
+                                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => SlotUsers(id:docs[index - 1].id)));
                                   },
                                   child: Text(
                                     'View booked users',
