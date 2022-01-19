@@ -17,57 +17,45 @@ class _AdminHomeState extends State<AdminHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:GridView.count(
-          crossAxisCount: 3,
-          crossAxisSpacing: 4.0,
-          mainAxisSpacing: 8.0,
-          children: List.generate(choices.length, (index) {
-            return Center(
-              child: SelectCard(choice: choices[index]),
-            );
-          }
-          )
-      )
-    )
-    // Center(
-      //   child: Column(
-      //     mainAxisAlignment: MainAxisAlignment.center,
-      //     children: [
-      //       ElevatedButton(
-      //         onPressed: (){
-      //           Navigator.of(context).push(MaterialPageRoute(builder: (context) => ComplaintListAdminScreen()));
-      //         },
-      //         child: Text('Complaints Section'),
-      //       ),
-      //       ElevatedButton(
-      //         onPressed: (){
-      //           Navigator.of(context).push(MaterialPageRoute(builder: (context) => AnnouncementMakeScreen()));
-      //         },
-      //         child: Text('Make an announcement'),
-      //       ),
-      //       ElevatedButton(
-      //         onPressed: (){
-      //           Navigator.of(context).push(MaterialPageRoute(builder: (context) => SlotManageScreen()));
-      //         },
-      //         child: Text('Add slots'),
-      //       ),
-      //       ElevatedButton(
-      //         onPressed: (){
-      //           Navigator.of(context).push(MaterialPageRoute(builder: (context) => CovidStatusAdmin()));
-      //         },
-      //         child: Text('Update covid status'),
-      //       ),
-      //       ElevatedButton(
-      //         onPressed: () async {
-      //           await logoutAdmin();
-      //           Navigator.pushReplacementNamed(context, WelcomeScreen.id);
-      //
-      //         },
-      //         child: Text('Logout admin'),
-      //       ),
-      //     ],
-      //   ),
-      // ),
+      body:Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              onPressed: (){
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => ComplaintListAdminScreen()));
+              },
+              child: Text('Complaints Section'),
+            ),
+            ElevatedButton(
+              onPressed: (){
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => AnnouncementMakeScreen()));
+              },
+              child: Text('Make an announcement'),
+            ),
+            ElevatedButton(
+              onPressed: (){
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => SlotManageScreen()));
+              },
+              child: Text('Add slots'),
+            ),
+            ElevatedButton(
+              onPressed: (){
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => CovidStatusAdmin()));
+              },
+              child: Text('Update covid status'),
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                await logoutAdmin();
+                Navigator.pushReplacementNamed(context, WelcomeScreen.id);
+
+              },
+              child: Text('Logout admin'),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
