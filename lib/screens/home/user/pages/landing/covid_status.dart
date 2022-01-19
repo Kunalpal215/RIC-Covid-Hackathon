@@ -18,26 +18,23 @@ class _Covid_StatusState extends State<Covid_Status> {
       return Card(
         color: Colors.red[800],
         margin: const EdgeInsets.fromLTRB(10, 15, 10, 10),
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: const <Widget>[
-               ListTile(
-                textColor: Colors.white,
-                title: Text('Infected',
-                    style: TextStyle(
-                      fontSize: 30,
-                      letterSpacing: 1.8,
-                    ),
-                ),
-                // subtitle: Text('Infected',
-                //   style: TextStyle(
-                //     fontSize: 20,
-                //   ),),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: const <Widget>[
+             ListTile(
+              textColor: Colors.white,
+              title: Text('Infected',
+                  style: TextStyle(
+                    fontSize: 20,
+                    letterSpacing: 1,
+                  ),
               ),
-            ],
-          ),
+              // subtitle: Text('Infected',
+              //   style: TextStyle(
+              //     fontSize: 20,
+              //   ),),
+            ),
+          ],
         ),
       );
     }

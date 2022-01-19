@@ -41,7 +41,7 @@ class _ComplaintInfoState extends State<ComplaintInfo> {
               width: screenWidth,
               //height: screenHeight*0.9,
               decoration: BoxDecoration(
-                  color: Colors.lightGreenAccent,
+                  color: Colors.pink[100],
                   borderRadius: BorderRadius.circular(10)),
               margin: EdgeInsets.symmetric(
                   horizontal: screenWidth * 0.02, vertical: screenWidth * 0.05),
@@ -66,10 +66,8 @@ class _ComplaintInfoState extends State<ComplaintInfo> {
                       style: TextStyle(fontSize: screenWidth * 0.04),
                     ),
                   ),
-                  Container(
-                    margin: EdgeInsets.all(screenWidth * 0.02),
-                    child: Text("Reply Status : " +
-                        (snapshot.data!["solved"] == true ? "Yes" : "No"),style: TextStyle(fontWeight: FontWeight.bold),),
+                  Divider(
+                    color: Colors.grey,
                   ),
                   Container(
                     margin: EdgeInsets.all(screenWidth * 0.02),
