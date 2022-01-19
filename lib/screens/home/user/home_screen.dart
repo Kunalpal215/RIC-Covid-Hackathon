@@ -5,6 +5,7 @@ import 'package:covid_app/constants.dart';
 import 'package:covid_app/screens/auth/profile_screen.dart';
 import 'package:covid_app/screens/home/user/pages/Covid_Cases/cases_info.dart';
 import 'package:covid_app/screens/home/user/pages/booking/slotbooking.dart';
+import 'package:covid_app/screens/home/user/pages/covid_map/map.dart';
 import 'package:covid_app/screens/home/user/pages/feedback/complaint_list.dart';
 import 'package:covid_app/screens/home/user/pages/landing/landing.dart';
 import 'package:covid_app/screens/welcome_screen.dart';
@@ -27,7 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
     SlotBooking(),
     ComplaintListScreen(),
     ProfileScreen(),
-    Cases_info()
+    Cases_info(),
   ];
   List Screentitle = [
     HomePageLanding.title,
@@ -106,7 +107,16 @@ class _HomeScreenState extends State<HomeScreen> {
                       },
                     ),
                   ),
-                  // Courses -->
+                  InkWell(
+                    child: ListTile(
+                      leading: Icon(Icons.map_outlined),
+                      title: Text("Campus Map"),
+                      onTap: () {
+                        Navigator.pop(context);
+                        Navigator.pushNamed(context, MapScreen.id);
+                      },
+                    ),
+                  ),
 
 
                   InkWell(
