@@ -334,14 +334,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 children: <Widget>[
                                   Flexible(
                                     child: IgnorePointer(
-                                      ignoring: _status,
+                                      ignoring: true,
                                       child: DropdownButton<String>(
                                         // Initial Value
                                         value: dropdownvaluecovidstatus,
 
                                         // Down Arrow Icon
-                                        icon: const Icon(
-                                            Icons.keyboard_arrow_down),
+                                        icon: Container(),
 
                                         // Array list of items
                                         items: covis_status.map((String items) {

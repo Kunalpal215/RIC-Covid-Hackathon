@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cool_alert/cool_alert.dart';
 import 'package:covid_app/screens/home/admin/covid_status/covid_status_form.dart';
 import 'package:flutter/material.dart';
 
@@ -14,31 +15,33 @@ class _CovidStatusAdminState extends State<CovidStatusAdmin> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     return SafeArea(
-        child: Scaffold(
-      body: Column(
-        children: [
-          Container(
-            width: MediaQuery.of(context).size.width,
-            child: GestureDetector(
-              onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => CovidUpdateForm())),
-              child: Container(
-                color: Colors.pink[300],
-                width: screenWidth * 0.1,
-                height: screenWidth * 0.15,
-                margin: EdgeInsets.all(10.0),
-                child: Center(
-                  child: Text(
-                    'ADD CASES',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+      child: Scaffold(
+        body: Column(
+          children: [
+            Container(
+              width: MediaQuery.of(context).size.width,
+              child: GestureDetector(
+                onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => CovidUpdateForm())),
+                child: Container(
+                  color: Colors.pink[300],
+                  width: screenWidth * 0.1,
+                  height: screenWidth * 0.15,
+                  margin: EdgeInsets.all(10.0),
+                  child: Center(
+                    child: Text(
+                      'ADD CASES',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ),
-
-              ),),
-          ),
-          Covid_Table()
-        ],
+              ),
+            ),
+            Covid_Table()
+          ],
+        ),
       ),
-    ),);
+    );
   }
 }
 
@@ -147,12 +150,29 @@ class _Covid_TableState extends State<Covid_Table> {
                         ]),
                       ),
                       GestureDetector(
-                        onTap: (){
-                          FirebaseFirestore.instance.collection('users').doc(snapshot.data!.docs[i].id).update({"covid_status":"negative"});
-                          FirebaseFirestore.instance.collection('cases').doc(snapshot.data!.docs[i].id).delete();
-                        },
-                        child: Icon(Icons.delete)
-                      ),
+                          onTap: () {
+                            CoolAlert.show(
+                                context: context,
+                                barrierDismissible: false,
+                                type: CoolAlertType.confirm,
+                                text: 'Do you want to delete',
+                                confirmBtnText: 'Yes',
+                                cancelBtnText: 'No',
+                                onConfirmBtnTap: () async {
+                                  await FirebaseFirestore.instance
+                                      .collection('users')
+                                      .doc(snapshot.data!.docs[i].id)
+                                      .update({"covid_status": "negative"});
+                                  await FirebaseFirestore.instance
+                                      .collection('cases')
+                                      .doc(snapshot.data!.docs[i].id)
+                                      .delete();
+                                  Navigator.pop(context);
+                                },
+                                confirmBtnColor: Colors.pink[600]!,
+                                backgroundColor: Colors.pink[100]!);
+                          },
+                          child: Icon(Icons.delete)),
                     ]),
                   ],
                 ],

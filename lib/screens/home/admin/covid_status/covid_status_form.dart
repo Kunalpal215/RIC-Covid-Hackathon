@@ -17,6 +17,7 @@ class _CovidUpdateFormState extends State<CovidUpdateForm> {
   TextEditingController rollController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   List<String> hostels = [
+    "Siang",
     "Brahmaputra",
     "Dihing",
     "Manas",
@@ -27,7 +28,8 @@ class _CovidUpdateFormState extends State<CovidUpdateForm> {
     "Dibang",
     "Dhansiri",
     "Subansiri",
-    "Kameng"
+    "Kameng",
+
   ];
   List<String> covid_status = ["positive","negative"];
   String selectedHostel = "Brahmaputra";
@@ -146,7 +148,7 @@ class _CovidUpdateFormState extends State<CovidUpdateForm> {
                   }
                 },
                 child: Container(
-                  color: Colors.blueAccent,
+                  color: Colors.pinkAccent,
                   width: screenWidth * 0.1,
                   height: screenWidth * 0.15,
                   margin: EdgeInsets.all(screenWidth * 0.1),
