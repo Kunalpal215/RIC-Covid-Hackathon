@@ -11,7 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 // Function to load sign in user's details
 Future<bool> loadUser(String mobileNumber,String? name, String? covidstatus,String? vaccinestatus,String?hostel,String?room,String? roll) async {
-  print('${mobileNumber} ${name} ${covidstatus} ${vaccinestatus}');
+  // print('${mobileNumber} ${name} ${covidstatus} ${vaccinestatus}');
   kCurrUser = User(mobileNumber: mobileNumber,name:name,covidstatus: covidstatus,vaccinestatus: vaccinestatus,hostel:hostel,room:room,roll:roll);
   await kCurrUser!.loadExistence();
   if (kCurrUser!.exists) {
@@ -19,7 +19,6 @@ Future<bool> loadUser(String mobileNumber,String? name, String? covidstatus,Stri
   } else {
     await kCurrUser!.createdocument(mobileNumber,name, covidstatus,vaccinestatus,hostel,room,roll);
   }
-  print(kCurrUser!.exists);
   return kCurrUser!.exists;
 }
 

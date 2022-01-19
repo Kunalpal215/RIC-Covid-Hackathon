@@ -114,7 +114,7 @@ class _LoginScreenState extends State<LoginScreen> {
           context: context,
           barrierDismissible: false,
           builder: (BuildContext context) => AlertDialog(
-            title: const Text('Enter OTP Code (will exire in 2 minutes)'),
+            title: const Text('Enter OTP Code (will expire in 2 minutes)'),
             content: TextField(
               onChanged: (val) {
                 otp = val;

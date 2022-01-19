@@ -49,8 +49,10 @@ class User {
       print(documentSnapshot.size);
       if (documentSnapshot.size > 0) {
         exists = true;
+        return true;
       } else {
         exists = false;
+        return false;
       }
     });
   }
@@ -98,18 +100,17 @@ class User {
   Future retrieveDocument() async {
     CollectionReference users = FirebaseFirestore.instance.collection('users');
     await users
-        .where('mobile', isEqualTo: mobileNumber)
-        .snapshots()
-        .listen((event) {
-      kCurrUser!.name = event.docs.first['name'];
-      kCurrUser!.covidstatus = event.docs.first['covid_status'];
-      kCurrUser!.vaccinestatus = event.docs.first['vaccine_status'];
-      kCurrUser!.hostel = event.docs.first['hostel'];
-      kCurrUser!.room = event.docs.first['room'];
-      kCurrUser!.roll = event.docs.first['roll'];
+        .where('mobile', isEqualTo: mobileNumber).get()
+        .then((documentSnapshot){
+      kCurrUser!.name = documentSnapshot.docs.first['name'];
+      kCurrUser!.covidstatus = documentSnapshot.docs.first['covid_status'];
+      kCurrUser!.vaccinestatus = documentSnapshot.docs.first['vaccine_status'];
+      kCurrUser!.hostel = documentSnapshot.docs.first['hostel'];
+      kCurrUser!.room = documentSnapshot.docs.first['room'];
+      kCurrUser!.roll = documentSnapshot.docs.first['roll'];
     });
+    return;
   }
 
-  // Downloads current user's profile image from Firebase Storage
 
 }

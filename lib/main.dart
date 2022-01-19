@@ -12,6 +12,8 @@ import 'package:covid_app/screens/home/user/pages/booking/slotbooking.dart';
 import 'package:covid_app/screens/home/user/pages/covid_map/map.dart';
 import 'package:covid_app/screens/home/user/pages/feedback/complaint_register.dart';
 import 'package:covid_app/screens/welcome_screen.dart';
+import 'package:covid_app/services/load_user.dart';
+import 'package:covid_app/splashscreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -21,19 +23,6 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
-  // Checking if user previously logged in using SharedPreferences
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  kMobileNumber = await prefs.getString('mobile');
-  kEmail = await prefs.getString('email');
-  //Check if user exists
-  if (kMobileNumber != null) {
-    kCurrUser = User(mobileNumber: kMobileNumber);
-    await kCurrUser!.retrieveDocument();
-  }
-  //Check if admin exists
-  if (kEmail != null) {
-    kCurrAdmin = Admin(email: kEmail);
-  }
   runApp(
     MyApp(),
   );
@@ -52,11 +41,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Covid Management',
-      home: (kCurrUser == null && kCurrAdmin == null)
-          ? const WelcomeScreen()
-          : (kCurrUser != null && kCurrAdmin == null)
-              ? const HomeScreen()
-              : const AdminHome(),
+      home: SplashScreen(),
       theme: ThemeData(
         primarySwatch: Colors.pink,
         primaryColor: Colors.pink,
