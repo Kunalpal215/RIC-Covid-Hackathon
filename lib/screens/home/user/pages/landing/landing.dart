@@ -1,6 +1,7 @@
 import 'package:covid_app/screens/home/user/pages/covid_map/map.dart';
 import 'package:covid_app/screens/home/user/pages/landing/getCasesinfo.dart';
 import 'package:covid_app/screens/home/user/pages/landing/getannouncements.dart';
+import 'package:covid_app/screens/home/user/pages/landing/covid_status.dart';
 import 'package:flutter/material.dart';
 
 class HomePageLanding extends StatefulWidget {
@@ -20,6 +21,7 @@ class _HomePageLandingState extends State<HomePageLanding> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
+          Covid_Status(),
           Container(
             margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
             child: Text(
