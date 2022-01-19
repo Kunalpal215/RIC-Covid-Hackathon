@@ -164,7 +164,7 @@ class _AdminHomeState extends State<AdminHome> {
                     confirmBtnText: 'Yes',
                     cancelBtnText: 'No',
                     onConfirmBtnTap: () async {
-                      await logoutUser();
+                      await logoutAdmin();
                       Navigator.pop(context);
                       Navigator.pushReplacementNamed(context, WelcomeScreen.id);
                     },

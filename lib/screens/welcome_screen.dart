@@ -40,7 +40,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   padding: const EdgeInsets.fromLTRB(30,130,0,0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
+                    children: const [
                       Text(
                         "Covid",
                         textAlign: TextAlign.start,
@@ -69,7 +69,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               ),
               const Spacer(),
               const Spacer(),
-              GestureDetector(
+              Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10),
                 child: FlatButton(
 
                   onPressed: (){Navigator.pushNamed(context, LoginScreen.id);},
@@ -87,11 +88,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       style: BorderStyle.solid
                   ),
                       borderRadius: BorderRadius.circular(30)),
-                )
+                ),
               ),
+              SizedBox(height:15),
 
               Padding(
-                padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
+                padding: EdgeInsets.symmetric(horizontal: 10),
                 child: GestureDetector(
                     child: FlatButton(
 

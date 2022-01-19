@@ -38,11 +38,21 @@ class _ComplaintInfoState extends State<ComplaintInfo> {
                 child: CircularProgressIndicator(),
               );
             return Container(
+
               width: screenWidth,
               //height: screenHeight*0.9,
               decoration: BoxDecoration(
-                  color: Colors.pink[100],
-                  borderRadius: BorderRadius.circular(10)),
+                color: Colors.pink[100],
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 5,
+                    blurRadius: 7,
+                    offset: Offset(0, 3), // changes position of shadow
+                  ),
+                ],
+              ),
               margin: EdgeInsets.symmetric(
                   horizontal: screenWidth * 0.02, vertical: screenWidth * 0.05),
               child: Column(
