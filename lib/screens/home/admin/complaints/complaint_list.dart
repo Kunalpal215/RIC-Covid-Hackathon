@@ -153,7 +153,7 @@ class _ComplaintListAdminScreenState extends State<ComplaintListAdminScreen> {
             curIdx=index;
           });
         },
-        items: [
+        items: const [
           BottomNavigationBarItem(
               icon: Icon(Icons.message_rounded), label: "Active Complaints"),
           BottomNavigationBarItem(

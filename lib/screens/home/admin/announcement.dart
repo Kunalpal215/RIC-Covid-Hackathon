@@ -76,7 +76,7 @@ class _AnnouncementMakeScreenState extends State<AnnouncementMakeScreen> {
                 Navigator.pop(context);
               }
             }, child: Container(
-              color: Colors.blueAccent,
+              color: Colors.pinkAccent,
               width: screenWidth*0.1,
               height: screenWidth*0.15,
               margin: EdgeInsets.all(screenWidth*0.1),

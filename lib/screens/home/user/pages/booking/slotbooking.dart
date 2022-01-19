@@ -29,7 +29,6 @@ class _SlotBookingState extends State<SlotBooking> {
             stream: FirebaseFirestore.instance
                 .collection('appointments')
                 .where('slot_from', isGreaterThanOrEqualTo: _start)
-                .where('slot_from', isLessThanOrEqualTo: _end)
                 .snapshots(),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
