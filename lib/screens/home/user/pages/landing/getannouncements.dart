@@ -1,6 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:covid_app/screens/home/user/pages/announcements/getAnnouncements.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
