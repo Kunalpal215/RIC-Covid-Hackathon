@@ -56,42 +56,21 @@ class _CovidUpdateFormState extends State<CovidUpdateForm> {
                 },
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text("Hostel",style: TextStyle(fontSize: screenWidth*0.06,fontWeight: FontWeight.bold),),
-                    DropdownButton<String>(
-                        value: selectedHostel,
-                        icon: const Icon(Icons.keyboard_arrow_down),
-                        items: hostels
-                            .map((e) => DropdownMenuItem<String>(value: e,child: Text(e),),)
-                            .toList(),
-                        onChanged: (value) {
-                          setState(() {
-                            selectedHostel = value!;
-                          });
-                        }),
-                  ],
-                ),
-                Column(
-                  children: [
-                    Text("Covid Status",style: TextStyle(fontSize: screenWidth*0.06,fontWeight: FontWeight.bold),),
-                    DropdownButton<String>(
-                        value: covidValue,
-                        icon: const Icon(Icons.keyboard_arrow_down),
-                        items: covid_status
-                            .map((e) => DropdownMenuItem<String>(value: e,child: Text(e),),)
-                            .toList(),
-                        onChanged: (value) {
-                          setState(() {
-                            covidValue = value!;
-                          });
-                        }),
-                  ],
-                ),
+                Text("Hostel",style: TextStyle(fontSize: screenWidth*0.06,fontWeight: FontWeight.bold),),
+                DropdownButton<String>(
+                    value: selectedHostel,
+                    icon: const Icon(Icons.keyboard_arrow_down),
+                    items: hostels
+                        .map((e) => DropdownMenuItem<String>(value: e,child: Text(e),),)
+                        .toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        selectedHostel = value!;
+                      });
+                    }),
               ],
             ),
             Container(
@@ -156,10 +135,12 @@ class _CovidUpdateFormState extends State<CovidUpdateForm> {
                      if(earlierStatus=="negative" && covidValue=="positive"){
                        FirebaseFirestore.instance.collection('users').doc("+91"+mobileController.text).update({"covid_status":"positive"});
                        FirebaseFirestore.instance.collection('cases').doc("+91"+mobileController.text).set({"Date":DateTime.now(),"Hostel":selectedHostel,"Name":nameController.text,"Roll":rollController.text,"Room":roomController.text});
+                       return;
                      }
                      if(earlierStatus=="positive" && covidValue=="negative"){
                        FirebaseFirestore.instance.collection('users').doc("+91"+mobileController.text).update({"covid_status":"negative"});
                        FirebaseFirestore.instance.collection('cases').doc("+91"+mobileController.text).delete();
+                       return;
                      }
                      Navigator.pop(context);
                   }
