@@ -34,11 +34,12 @@ class _CovidUpdateFormState extends State<CovidUpdateForm> {
   List<String> covid_status = ["positive","negative"];
   String selectedHostel = "Brahmaputra";
   String covidValue="positive";
+  bool loading=false;
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-      body: Form(
+      body: loading?Center(child:CircularProgressIndicator()):Form(
         key: formKey,
         child: ListView(
           children: [
@@ -127,7 +128,13 @@ class _CovidUpdateFormState extends State<CovidUpdateForm> {
             ),
             GestureDetector(
                 onTap: () async {
+
                   if(formKey.currentState!.validate()){
+                    print('clicked');
+                    setState(() {
+                      loading=true;
+                    });
+                    print('clicked');
                      DocumentSnapshot person = await FirebaseFirestore.instance.collection('users').doc("+91"+mobileController.text).get();
                      if(!person.exists){
                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("This user is not registered with us.")));
@@ -135,13 +142,15 @@ class _CovidUpdateFormState extends State<CovidUpdateForm> {
                      }
                      String earlierStatus = person["covid_status"];
                      if(earlierStatus=="negative" && covidValue=="positive"){
-                       FirebaseFirestore.instance.collection('users').doc("+91"+mobileController.text).update({"covid_status":"positive"});
-                       FirebaseFirestore.instance.collection('cases').doc("+91"+mobileController.text).set({"Date":DateTime.now(),"Hostel":selectedHostel,"Name":nameController.text,"Roll":rollController.text,"Room":roomController.text});
+                       print('clicked');
+                       await FirebaseFirestore.instance.collection('users').doc("+91"+mobileController.text).update({"covid_status":"positive"});
+                       await FirebaseFirestore.instance.collection('cases').doc("+91"+mobileController.text).set({"Date":DateTime.now(),"Hostel":selectedHostel,"Name":nameController.text,"Roll":rollController.text,"Room":roomController.text});
                        return;
                      }
                      if(earlierStatus=="positive" && covidValue=="negative"){
-                       FirebaseFirestore.instance.collection('users').doc("+91"+mobileController.text).update({"covid_status":"negative"});
-                       FirebaseFirestore.instance.collection('cases').doc("+91"+mobileController.text).delete();
+                       print('clicked');
+                       await FirebaseFirestore.instance.collection('users').doc("+91"+mobileController.text).update({"covid_status":"negative"});
+                       await FirebaseFirestore.instance.collection('cases').doc("+91"+mobileController.text).delete();
                        return;
                      }
                      Navigator.pop(context);
