@@ -81,7 +81,7 @@ class _GetAnnouncementsState extends State<GetAnnouncements> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children:[
                         Text(
-                          'Author - ${storedocs[index]['author']??''}',
+                          ' - ${storedocs[index]['author']??''}',
                           style: TextStyle(
                               fontSize: 16, fontWeight: FontWeight.w300),
                         ),
